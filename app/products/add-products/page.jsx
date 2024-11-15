@@ -6,7 +6,7 @@ import { Toaster, toaster } from "@/components/ui/toaster";
 import AddProductFormV2 from "@/components/custom/addProductForm";
 import { productFormHandler } from "@/app/products/add-products/productFormHandler";
 
-export default function page() {
+export default function AddProductPage() {
   const [state, formAction] = useFormState(productFormHandler, null);
 
   useEffect(() => {

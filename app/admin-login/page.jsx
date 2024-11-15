@@ -63,7 +63,7 @@ export default function AdminLogin() {
             sign in
           </Button>
           <Typography color="gray" className="mt-4 text-center font-normal">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="/admin-signup" className="font-medium text-gray-900">
               Sign Up
             </Link>

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import "./globals.css";
 import { Provider } from "@/components/ui/provider";
+import { Navbar } from "@/components/custom/Navbar";
+import { SmallNavigationDrawer } from "@/components/custom/smallNavbar";
 
 export const metadata = {
   title: "Shopping Cart || shop anything anytime",
@@ -10,40 +12,30 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+          integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+        />
+      </head>
       <body className="antialiased">
         <header className="sticky top-0 z-10 w-full h-20 px-4 bg-inherit flex items-center justify-between ">
           <Link href="/">
             <h1 className="text-3xl font-bold ">Shopping Cart</h1>
           </Link>
-          <nav className="flex items-center justify-center gap-8">
-            <Link
-              className="px-6 py-2 rounded-full  hover:bg-neutral-800 hover:drop-shadow-xl "
-              href="/"
-            >
-              Home
-            </Link>
-            <Link
-              className="px-6 py-2 rounded-full  hover:bg-neutral-800 hover:drop-shadow-xl "
-              href="/about"
-            >
-              About
-            </Link>
-            <Link
-              className="px-6 py-2 rounded-full  hover:bg-neutral-800 hover:drop-shadow-xl "
-              href="/products"
-            >
-              Products
-            </Link>
-            <Link
-              className="px-6 py-2 rounded-full  hover:bg-neutral-800 hover:drop-shadow-xl "
-              href="/admin-login"
-            >
-              Login
-            </Link>
-          </nav>
+          <div>
+            <span className="block md:hidden">
+              <SmallNavigationDrawer />
+            </span>
+            <span className="hidden md:block">
+              <Navbar />
+            </span>
+          </div>
         </header>
         <Provider>{children}</Provider>
-        {/* {children} */}
       </body>
     </html>
   );

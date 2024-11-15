@@ -1,5 +1,4 @@
-import Link from "next/link";
-import connectDB from "@/lib/DB/connectDB";
+import { connectDB } from "@/lib/DB/connectDB";
 import { BackgroundBeamsDemo } from "@/components/custom/backgroundBeams";
 
 export default function Home() {
@@ -8,7 +7,7 @@ export default function Home() {
     <div className="min-h-screen w-full flex flex-col items-center justify-center antialiased">
       {" "}
       <div className=" mx-auto text-center">
-        <h1 className="text-lg md:text-6xl bg-clip-text  bg-gradient-to-b from-neutral-200 to-neutral-600 font-sans font-bold">
+        <h1 className="px-2 text-[45px] md:text-6xl bg-clip-text  bg-gradient-to-b from-[#e5e5e5] to-[#404040] font-sans font-bold">
           Buy anything from anywhere
         </h1>
         <p></p>

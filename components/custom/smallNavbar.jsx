@@ -19,7 +19,7 @@ export function SmallNavigationDrawer() {
       <IconButton
         color="white"
         onClick={openDrawer}
-        className="bg-gray-800 text-white text-lg rounded-full"
+        className="bg-gray-800 text-white text-lg rounded-full grid place-items-center"
       >
         <i className="fa-solid fa-bars" />
       </IconButton>

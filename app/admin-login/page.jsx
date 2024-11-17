@@ -33,7 +33,7 @@ export default function AdminLogin() {
   }, [state]);
 
   return (
-    <div className="bg-inherit min-h-screen w-full flex justify-center items-center">
+    <div className="bg-inherit min-h-[100dvh] w-full flex justify-center items-center">
       <Toaster />
       <form
         action={formAction}

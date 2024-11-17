@@ -21,10 +21,6 @@ export default function Cardv2({ product }) {
             {product.price}$
           </p>
         </div>
-        <p className="block antialiased font-sans text-sm leading-normal text-gray-700 font-normal opacity-75">
-          With plenty of talk and listen time, voice-activated Siri access, and
-          an available wireless charging case.
-        </p>
       </div>
       <div className="p-4 pt-0">
         <button

@@ -1,7 +1,6 @@
 "use server";
 
 import bcrypt from "bcrypt";
-import { redirect } from "next/navigation";
 
 import Admin from "../../lib/DB/adminSchema.model";
 import { connectDB } from "@/lib/DB/connectDB";
@@ -18,7 +17,6 @@ export async function handleAdminSubmit(prevState, formData) {
     password: password,
     rememberme: rememberme,
   };
-  console.log(data);
 
   if (!data.email || !data.password) {
     return {
@@ -26,26 +24,26 @@ export async function handleAdminSubmit(prevState, formData) {
       message: "Please fill all the fields",
     };
   }
-  console.log("valid data");
 
-  const admin = await Admin.find({ email: data.email });
+  const admin = await Admin.findOne({ email: data.email });
+
   if (!admin) {
     return {
       success: false,
       message: "Invalid email or password",
     };
   }
-  console.log(admin);
 
-  const hashedPassword = await bcrypt.hash(data.password, 10);
-  if (hashedPassword !== admin.password) {
-    console.log("password not matched");
+  const match = await bcrypt.compare(data.password, admin.password);
+  if (!match) {
     return {
       success: false,
       message: "Invalid password",
     };
-  } else {
-    console.log("password matched");
-    redirect("/");
   }
+
+  return {
+    success: true,
+    message: "Login successful",
+  };
 }

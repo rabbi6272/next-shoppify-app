@@ -1,8 +1,6 @@
-import { connectDB } from "@/lib/DB/connectDB";
 import { BackgroundBeamsDemo } from "@/components/custom/backgroundBeams";
 
 export default function Home() {
-  connectDB();
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center antialiased">
       {" "}

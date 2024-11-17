@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const shopingItemSchema = new mongoose.Schema(
+const productItemSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -18,5 +18,7 @@ const shopingItemSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const ShopingItem = mongoose.model("ShopingItem", shopingItemSchema);
-export default ShopingItem;
+const ProductItem =
+  mongoose.models.ProductItem ||
+  mongoose.model("ProductItem", productItemSchema);
+export default ProductItem;

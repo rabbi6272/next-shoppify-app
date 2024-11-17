@@ -1,7 +1,7 @@
 "use server";
-
-import ShopingItem from "@/lib/DB/productSchema.model";
 import { revalidatePath } from "next/cache";
+
+import ProductItem from "@/model/ProductSchema.model";
 
 export async function productFormHandler(prevState, formData) {
   if (!formData) return { success: false, message: "No form data provided" };
@@ -22,7 +22,7 @@ export async function productFormHandler(prevState, formData) {
   }
 
   try {
-    const data = new ShopingItem({ name, price, image, category, description });
+    const data = new ProductItem({ name, price, image, category, description });
     await data.save();
     revalidatePath("/products/add-products");
     return {

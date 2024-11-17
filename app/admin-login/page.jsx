@@ -20,7 +20,7 @@ export default function AdminLogin() {
         type: "success",
         duration: 2000,
       });
-      setTimeout(() => (window.location.href = "/products"), 1500);
+      setTimeout(() => (window.location.href = "/admin"), 1500);
     } else if (state) {
       toaster.create({
         title: "Login Failed",
@@ -33,7 +33,7 @@ export default function AdminLogin() {
   }, [state]);
 
   return (
-    <div className="bg-inherit min-h-[100dvh] w-full flex justify-center items-center">
+    <div className="bg-inherit h-[100%] w-full flex justify-center items-center">
       <Toaster />
       <form
         action={formAction}

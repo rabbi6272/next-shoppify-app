@@ -1,10 +1,14 @@
 import { Suspense } from "react";
 
-import ShopingItem from "@/lib/DB/productSchema.model";
+import ProductItem from "@/model/ProductSchema.model";
 import Cardv2 from "@/components/custom/cardv2";
 
+import { connectDB } from "@/lib/DB/connectDB";
+
+connectDB();
+
 export default async function Products() {
-  const products = await ShopingItem.find({});
+  const products = await ProductItem.find({});
 
   // Convert products to plain objects
   const plainProducts = products.map((product) =>

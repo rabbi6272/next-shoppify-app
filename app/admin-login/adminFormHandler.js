@@ -2,7 +2,7 @@
 
 import bcrypt from "bcrypt";
 
-import Admin from "../../lib/DB/adminSchema.model";
+import Admin from "../../model/adminSchema.model";
 import { connectDB } from "@/lib/DB/connectDB";
 
 connectDB();

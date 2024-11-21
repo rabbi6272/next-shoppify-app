@@ -14,10 +14,10 @@ export default function Cardv2({ product }) {
       </div>
       <div className="p-4">
         <div className="mb-2 flex items-center justify-between">
-          <p className="block antialiased font-sans text-base leading-relaxed text-blue-gray-900 font-semibold">
+          <p className="block antialiased font-Inter text-base leading-relaxed text-blue-gray-900 font-semibold">
             {product.name}
           </p>
-          <p className="block antialiased font-sans text-base leading-relaxed text-blue-gray-900">
+          <p className="block antialiased font-Nunito text-base leading-relaxed text-blue-gray-900">
             {product.price}$
           </p>
         </div>

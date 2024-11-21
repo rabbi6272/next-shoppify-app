@@ -1,19 +1,10 @@
 import { Suspense } from "react";
 
-import ProductItem from "@/model/ProductSchema.model";
 import Cardv2 from "@/components/custom/cardv2";
-
-import { connectDB } from "@/lib/DB/connectDB";
-
-connectDB();
+import { getProducts } from "@/lib/DB/getProducts";
 
 export default async function Products() {
-  const products = await ProductItem.find({});
-
-  // Convert products to plain objects
-  const plainProducts = products.map((product) =>
-    JSON.parse(JSON.stringify(product))
-  );
+  const plainProducts = await getProducts();
 
   return (
     <Suspense
@@ -24,10 +15,9 @@ export default async function Products() {
       }
     >
       <div>
-        <ul className="min-h-screen w-full grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4">
+        <ul className="min-h-screen w-full px-2 pt-2 md:px-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4">
           {plainProducts.map((product) => (
             <li key={product._id}>
-              {/* <ProductCard product={product} /> */}
               <Cardv2 product={product} />
             </li>
           ))}

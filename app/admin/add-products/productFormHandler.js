@@ -2,6 +2,7 @@
 import { revalidatePath } from "next/cache";
 
 import ProductItem from "@/model/ProductSchema.model";
+import { connectDB } from "@/lib/DB/connectDB";
 
 export async function productFormHandler(prevState, formData) {
   if (!formData) return { success: false, message: "No form data provided" };
@@ -22,6 +23,7 @@ export async function productFormHandler(prevState, formData) {
   }
 
   try {
+    await connectDB();
     const data = new ProductItem({ name, price, image, category, description });
     await data.save();
     revalidatePath("/products/add-products");

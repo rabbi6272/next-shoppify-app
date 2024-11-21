@@ -3,8 +3,10 @@ import { useEffect } from "react";
 import { useFormState } from "react-dom";
 
 import { Toaster, toaster } from "@/components/ui/toaster";
+
 import AddProductFormV2 from "@/components/custom/addProductForm";
 import { productFormHandler } from "./productFormHandler";
+
 export default function AddProductPage() {
   const [state, formAction] = useFormState(productFormHandler, null);
 
@@ -31,7 +33,7 @@ export default function AddProductPage() {
   }, [state]);
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center">
+    <div className="h-auto w-full pt-4 flex flex-col items-center justify-center">
       <Toaster />
 
       <form action={formAction}>

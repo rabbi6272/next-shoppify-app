@@ -22,7 +22,7 @@ export function Navbar() {
       </Link>
       <Link
         className="px-6 py-2 rounded-full  hover:bg-grey-800 hover:drop-shadow-xl "
-        href="/admin-login"
+        href="/admin/admin-login"
       >
         Login
       </Link>

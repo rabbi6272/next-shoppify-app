@@ -3,7 +3,7 @@ import { useFormState } from "react-dom";
 import { useEffect } from "react";
 
 import AdminLoginForm from "@/components/custom/AdminLoginForm";
-import { handleAdminSubmit } from "@/app/admin-login/adminFormHandler";
+import { handleAdminSubmit } from "@/app/admin/admin-login/adminFormHandler";
 
 import { Toaster, toaster } from "@/components/ui/toaster";
 
@@ -33,7 +33,7 @@ export default function AdminLogin() {
   }, [state]);
 
   return (
-    <div className="bg-inherit h-[100%] w-full flex justify-center items-center">
+    <div className="bg-inherit h-auto w-full pt-4 flex justify-center items-center">
       <Toaster />
       <form
         action={formAction}

@@ -52,13 +52,11 @@ export function SmallNavigationDrawer() {
           <Link onClick={closeDrawer} href="/about">
             <ListItem>About</ListItem>
           </Link>
-          {/* <Link onClick={closeDrawer} href="/contact">
-            <ListItem>Contact</ListItem>
-          </Link> */}
+
           <Link onClick={closeDrawer} href="/products">
             <ListItem>Products</ListItem>
           </Link>
-          <Link onClick={closeDrawer} href="/admin-login">
+          <Link onClick={closeDrawer} href="/admin/admin-login">
             <ListItem>Login</ListItem>
           </Link>
         </List>

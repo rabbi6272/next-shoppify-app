@@ -13,10 +13,17 @@ module.exports = withMT({
     "./@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
-  theme: {},
+  theme: {
+    extend: {
+      fontFamily: {
+        Nunito: ["Nunito"],
+        Inter: ["Inter"],
+        Sans: ["Roboto"],
+      },
+    },
+  },
   plugins: [addVariablesForColors],
 });
-
 function addVariablesForColors({ addBase, theme }) {
   let allColors = flattenColorPalette(theme("colors"));
   let newVars = Object.fromEntries(

@@ -7,7 +7,7 @@ import AddProductFormButton from "./addProductFormButton";
 export default function AddProductForm() {
   const { secureUrl, uploadWidget, resetUpload } = useUploadImage();
   return (
-    <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md p-4 w-[30rem]">
+    <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md p-4 w-[95vw] md:w-[60vw] lg:w-[50vw] xl:w-[40vw]">
       <input type="hidden" name="image" value={secureUrl} />
       <h3 className="block antialiased tracking-normal font-sans text-3xl font-semibold leading-snug text-blue-gray-900 text-center">
         Create Item

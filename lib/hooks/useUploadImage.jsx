@@ -6,22 +6,17 @@ import { CldUploadWidget } from "next-cloudinary";
 export default function useUploadImage() {
   const [secureUrl, setSecureUrl] = useState("");
 
-  const resetUpload = useCallback(() => {
-    setSecureUrl("");
-    setError(null);
-    setIsUploading(false);
-  }, []);
-
   const handleUploadSuccess = useCallback((result, widget) => {
     try {
       const imageUrl = result.info.secure_url;
       setSecureUrl(imageUrl);
       widget.close();
     } catch (err) {
-      setError("Failed to process uploaded image");
+      // setError("Failed to process uploaded image");
       console.error("Upload processing error:", err);
     }
   }, []);
+
   const handleUploadError = useCallback((error, widget) => {
     console.error("Upload error:", error);
   }, []);
@@ -57,6 +52,9 @@ export default function useUploadImage() {
       }}
     </CldUploadWidget>
   );
+  const resetUpload = useCallback((widget) => {
+    setSecureUrl("");
+  }, []);
 
   return {
     secureUrl,

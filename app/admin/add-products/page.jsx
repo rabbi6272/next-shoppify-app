@@ -18,6 +18,8 @@ export default function AddProductPage() {
   async function handleImageUpload(e) {
     e.preventDefault();
     const file = e.target.files[0];
+    if (!file) return;
+
     const formData = new FormData();
     formData.append("file", file);
 
@@ -26,7 +28,6 @@ export default function AddProductPage() {
       body: formData,
     });
     const { data } = await response.json();
-    console.log(data);
     setFormState((prev) => ({
       ...prev,
       image: data.secure_url,
@@ -133,8 +134,8 @@ export default function AddProductPage() {
                   unmount: { y: 25 },
                 }}
               >
-                <Option value="Women's Clothing">Women's Clothing</Option>
-                <Option value="Men's Clothing">Men's Clothing</Option>
+                <Option value="Women's Clothing">Women&apos;s Clothing</Option>
+                <Option value="Men's Clothing">Men&apos;s Clothing</Option>
                 <Option value="Smartphones">Smartphones</Option>
                 <Option value="Electronics">Electronics</Option>
                 <Option value="Home Decoration">Home Decoration</Option>

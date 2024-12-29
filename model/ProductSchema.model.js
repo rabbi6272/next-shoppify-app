@@ -4,13 +4,17 @@ const productItemSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: [true, "Product name is required"],
     },
     price: {
       type: Number,
-      required: true,
+      required: [true, "Product price is required"],
     },
-    image: {
+    image_url: {
+      type: String,
+      required: [true, "Product image is required"],
+    },
+    image_id: {
       type: String,
       required: true,
     },
@@ -21,4 +25,5 @@ const productItemSchema = new mongoose.Schema(
 const ProductItem =
   mongoose.models.ProductItem ||
   mongoose.model("ProductItem", productItemSchema);
+
 export default ProductItem;

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useFormStatus } from "react-dom";
 
 import { redirect } from "next/navigation";
@@ -12,7 +12,8 @@ export default function AddProductPage() {
     name: "",
     price: "",
     category: "",
-    image: "",
+    image_url: "",
+    image_id: "",
   });
 
   async function handleImageUpload(e) {
@@ -23,14 +24,15 @@ export default function AddProductPage() {
     const formData = new FormData();
     formData.append("file", file);
 
-    const response = await fetch("/api/products/uploadImage", {
+    const response = await fetch("/api/products/addProducts/uploadImage", {
       method: "POST",
       body: formData,
     });
     const { data } = await response.json();
     setFormState((prev) => ({
       ...prev,
-      image: data.secure_url,
+      image_url: data.secure_url,
+      image_id: data.public_id,
     }));
   }
 
@@ -44,7 +46,7 @@ export default function AddProductPage() {
       !formData.category ||
       !formData.image
     ) {
-      return toast.error("Please fill all the fields");
+      return toast.error("Please fill up all the fields");
     }
 
     try {

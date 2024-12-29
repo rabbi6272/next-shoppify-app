@@ -10,12 +10,11 @@ export default function AdminLogin() {
   const [state, formAction] = useFormState(handleAdminSubmit, null);
 
   useEffect(() => {
-    console.log(state);
     if (state && state.success) {
       toast.success("Login Successful");
       setTimeout(() => (window.location.href = "/admin"), 1500);
     } else if (state) {
-      toast.error("Login Failed");
+      toast.error(state.message);
     }
   }, [state]);
 

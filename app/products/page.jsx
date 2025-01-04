@@ -2,8 +2,8 @@ import { Suspense } from "react";
 import Cardv2 from "@/components/custom/cardv2";
 
 export default async function Products() {
-  const { data } = await fetch(
-    `${process.env.BASE_URL}/api/products/getProducts`,
+  const { data } = fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/getProducts`,
     {
       method: "GET",
       cache: "no-store",

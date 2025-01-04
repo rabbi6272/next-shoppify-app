@@ -3,7 +3,6 @@ import "./globals.css";
 import { Provider } from "@/components/ui/provider";
 import { Navbar } from "@/components/custom/Navbar";
 import { SmallNavigationDrawer } from "@/components/custom/smallNavbar";
-import { Toaster } from "react-hot-toast";
 import { Slide, ToastContainer } from "react-toastify";
 
 export const metadata = {
@@ -15,16 +14,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="true"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-          rel="stylesheet"
-        ></link>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
@@ -34,12 +23,6 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="antialiased">
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 2000,
-          }}
-        />
         <ToastContainer
           position="top-right"
           autoClose={3000}

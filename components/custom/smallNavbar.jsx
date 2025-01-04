@@ -8,11 +8,14 @@ import {
   List,
   ListItem,
 } from "@material-tailwind/react";
+import useUserStore from "@/lib/store/store";
 
 export function SmallNavigationDrawer() {
   const [open, setOpen] = useState(false);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
+
+  const user = useUserStore((state) => state.user);
 
   return (
     <>
@@ -56,9 +59,15 @@ export function SmallNavigationDrawer() {
           <Link onClick={closeDrawer} href="/products">
             <ListItem>Products</ListItem>
           </Link>
-          <Link onClick={closeDrawer} href="/admin/admin-login">
-            <ListItem>Login</ListItem>
-          </Link>
+          {user ? (
+            <Link onClick={closeDrawer} href="/admin">
+              <ListItem>Dashboard</ListItem>
+            </Link>
+          ) : (
+            <Link onClick={closeDrawer} href="/admin/admin-login">
+              <ListItem>Login</ListItem>
+            </Link>
+          )}
         </List>
       </Drawer>
     </>

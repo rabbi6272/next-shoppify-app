@@ -45,6 +45,7 @@ export async function handleAdminSubmit(prevState, formData) {
     return {
       success: true,
       message: "Login successful",
+      user: admin,
     };
   } catch (error) {
     return {

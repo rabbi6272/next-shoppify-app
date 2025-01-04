@@ -6,13 +6,20 @@ import AdminLoginForm from "@/components/custom/AdminLoginForm";
 import { handleAdminSubmit } from "@/app/admin/admin-login/adminFormHandler";
 
 import { toast } from "react-toastify";
+import { redirect } from "next/navigation";
 export default function AdminLogin() {
   const [state, formAction] = useFormState(handleAdminSubmit, null);
 
   useEffect(() => {
     if (state && state.success) {
       toast.success("Login Successful");
-      setTimeout(() => (window.location.href = "/admin"), 1500);
+
+      const user = localStorage.getItem("user");
+      if (user) {
+        localStorage.removeItem("user");
+        localStorage.setItem("user", JSON.stringify(state.user));
+      }
+      redirect("/admin");
     } else if (state) {
       toast.error(state.message);
     }

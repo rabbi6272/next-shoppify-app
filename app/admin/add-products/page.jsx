@@ -24,10 +24,13 @@ export default function AddProductPage() {
     const formData = new FormData();
     formData.append("file", file);
 
-    const response = await fetch("/api/products/addProducts/uploadImage", {
-      method: "POST",
-      body: formData,
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/addProducts/uploadImage`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
     const { data } = await response.json();
     setFormState((prev) => ({
       ...prev,
@@ -50,17 +53,19 @@ export default function AddProductPage() {
     }
 
     try {
-      const response = await fetch("/api/products/addProducts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/addProducts`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await response.json();
       if (data.success) {
         toast.success(data.message);
-        resetUpload();
         setFormState({
           name: "",
           price: "",

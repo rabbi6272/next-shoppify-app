@@ -4,6 +4,7 @@ import { Provider } from "@/components/ui/provider";
 import { Navbar } from "@/components/custom/Navbar";
 import { SmallNavigationDrawer } from "@/components/custom/smallNavbar";
 import { Slide, ToastContainer } from "react-toastify";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title: "Shopping Cart || shop anything anytime",
@@ -43,7 +44,10 @@ export default function RootLayout({ children }) {
             </span>
           </div>
         </header>
-        <Provider>{children}</Provider>
+        <Provider>
+          {children}
+          <Analytics />
+        </Provider>
       </body>
     </html>
   );

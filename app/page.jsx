@@ -12,7 +12,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="w-full pt-4 flex flex-col items-center justify-center antialiased">
+    <div className="w-full mt-8 flex flex-col items-center justify-center antialiased">
       {" "}
       <div className=" mx-auto text-center">
         <h1 className="px-2 text-[45px] md:text-6xl bg-clip-text  bg-gradient-to-b from-[#e5e5e5] to-[#404040] font-sans font-bold">

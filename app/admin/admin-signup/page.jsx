@@ -1,7 +1,11 @@
 import React from "react";
 
 function page() {
-  return <div>"Hello World"</div>;
+  return (
+    <div>
+      <h2>Hello World</h2>
+    </div>
+  );
 }
 
 export default page;

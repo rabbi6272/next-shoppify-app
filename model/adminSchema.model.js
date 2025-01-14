@@ -14,9 +14,11 @@ const adminSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    image: {
+    image_url: {
       type: String,
-      required: true,
+    },
+    image_id: {
+      type: String,
     },
   },
   { timestamps: true }

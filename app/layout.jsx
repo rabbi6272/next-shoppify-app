@@ -1,6 +1,6 @@
 import Link from "next/link";
 import "./globals.css";
-import { Provider } from "@/components/ui/provider";
+import { Nunito } from "next/font/google";
 import { Navbar } from "@/components/custom/Navbar";
 import { SmallNavigationDrawer } from "@/components/custom/smallNavbar";
 import { Slide, ToastContainer } from "react-toastify";
@@ -10,6 +10,11 @@ export const metadata = {
   title: "Shopping Cart || shop anything anytime",
   description: "An unique and versitile platform for good quality shopping",
 };
+
+const nunito = Nunito({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function RootLayout({ children }) {
   return (
@@ -23,7 +28,7 @@ export default function RootLayout({ children }) {
           referrerPolicy="no-referrer"
         />
       </head>
-      <body className="antialiased">
+      <body className={`${nunito.className}`}>
         <ToastContainer
           position="top-right"
           autoClose={3000}
@@ -31,7 +36,7 @@ export default function RootLayout({ children }) {
           theme="light"
           transition={Slide}
         />
-        <header className="sticky top-0 z-10 w-full h-20 px-4 bg-inherit flex items-center justify-between ">
+        <header className="sticky top-0 z-10 w-full h-20 px-4 md:px-8 bg-inherit flex items-center justify-between text-black">
           <Link href="/">
             <h1 className="text-3xl font-bold ">Shopping Cart</h1>
           </Link>
@@ -44,10 +49,8 @@ export default function RootLayout({ children }) {
             </span>
           </div>
         </header>
-        <Provider>
-          {children}
-          <Analytics />
-        </Provider>
+        {children}
+        <Analytics />
       </body>
     </html>
   );

@@ -38,21 +38,18 @@ export default function AdminLogin() {
 
     try {
       setPending(true);
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/admin-login`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const res = await fetch(`/api/admin/adminLogin`, {
+        method: "POST",
+        body: formData,
+      });
       const { success, message, user } = await res.json();
       if (success) {
         setPending(false);
-        const savedAdmin = localStorage.getItem("user");
+        const savedAdmin = localStorage.getItem("user_id");
         if (savedAdmin) {
-          localStorage.removeItem("user");
+          localStorage.removeItem("user_id");
         }
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("user_id", JSON.stringify(user._id));
         setUser(user);
         toast.success(message);
         router.push("/admin");
@@ -84,7 +81,7 @@ export default function AdminLogin() {
             </Typography>
             <Input
               name="email"
-              size="lg"
+              size="md"
               placeholder="name@mail.com"
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
               labelProps={{
@@ -101,7 +98,7 @@ export default function AdminLogin() {
             <Input
               name="password"
               type="password"
-              size="lg"
+              size="md"
               placeholder="********"
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
               labelProps={{
@@ -161,7 +158,10 @@ export default function AdminLogin() {
           </Button>
           <Typography color="gray" className="mt-4 text-center font-normal">
             Don&apos;t have an account?{" "}
-            <Link href="/admin-signup" className="font-medium text-gray-900">
+            <Link
+              href="/admin/admin-signup"
+              className="font-medium text-gray-900"
+            >
               Sign Up
             </Link>
           </Typography>

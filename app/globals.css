@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #f1f2f2;
+  --color-secondary: #c8d8e1;
+  --color-tertiary: #00adc1;
+  --color-quaternary: #2d7282;
 }
+
+body {
+  background-color: var(--color-primary);
+}
+
 ::-webkit-scrollbar {
   /* Customize the scrollbar width */
   width: 5px;
@@ -17,17 +22,6 @@
   background-color: #888;
   border-radius: 5px;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-}
 
 @layer utilities {
   .text-balance {
@@ -35,12 +29,8 @@ body {
   }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Nunito", sans-serif;
-  font-weight: 700;
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
 }

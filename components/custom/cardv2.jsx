@@ -2,14 +2,14 @@ import Image from "next/image";
 
 export default function Cardv2({ product }) {
   return (
-    <div className="relative flex flex-col bg-clip-border rounded-md bg-white text-gray-700  w-full max-w-[30rem] h-auto shadow-gray-900/10 hover:shadow-gray-900/20">
+    <div className=" relative flex flex-col bg-clip-border rounded-md bg-gray-100 text-gray-700  w-full max-w-[30rem] h-auto shadow-gray-900/10 hover:shadow-gray-900/20">
       <div className="relative bg-clip-border rounded-t-md overflow-hidden bg-white text-gray-700 h-[250px] md:h-[300px]">
         <Image
           fill
           sizes="100%"
-          src={product.image}
+          src={product.image_url}
           alt="card-image"
-          className="h-full w-full object-cover"
+          className="h-full w-full"
         />
       </div>
       <div className="p-4">

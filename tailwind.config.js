@@ -11,15 +11,9 @@ export default withMT({
   ],
   darkMode: "class",
   theme: {
-    extend: {
-      fontFamily: {
-        Nunito: ["Nunito"],
-        Inter: ["Inter"],
-        Sans: ["Roboto"],
-      },
-    },
+    extend: {},
   },
-  plugins: [addVariablesForColors],
+  plugins: [addVariablesForColors, require("flowbite/plugin")],
 });
 
 function addVariablesForColors({ addBase, theme }) {

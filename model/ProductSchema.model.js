@@ -16,7 +16,7 @@ const productItemSchema = new mongoose.Schema(
     },
     image_id: {
       type: String,
-      required: true,
+      required: [true, "Product image ID is required"],
     },
   },
   { timestamps: true }

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   Drawer,
@@ -16,22 +16,43 @@ export function SmallNavigationDrawer() {
   const closeDrawer = () => setOpen(false);
 
   const user = useUserStore((state) => state.user);
+  const setUser = useUserStore((state) => state.setUser);
+
+  // useEffect(() => {
+  //   if (user) return;
+  //   async function fetchUser() {
+  //     const res = await fetch(`/api/admin/getAdmin`, {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       credentials: "include",
+  //     });
+  //     const { user } = await res.json();
+  //     setUser(user);
+  //   }
+  //   fetchUser();
+  // }, []);
 
   return (
     <>
       <IconButton
-        color="white"
         onClick={openDrawer}
-        className="bg-gray-800 text-white text-lg rounded-full grid place-items-center"
+        className="text-black text-lg bg-transparent"
       >
         <i className="fa-solid fa-bars" />
       </IconButton>
-      <Drawer placement="right" open={open} onClose={closeDrawer}>
-        <div className="mb-2 flex items-center justify-between p-4">
+      <Drawer
+        placement="right"
+        open={open}
+        onClose={closeDrawer}
+        className="bg-inherit z-50"
+      >
+        <div className="mb-2 flex items-center justify-between p-4 bg-white">
           <Typography variant="h5" color="blue-gray">
             Shopping Cart
           </Typography>
-          <IconButton variant="text" color="blue-gray" onClick={closeDrawer}>
+          <IconButton variant="text" color="black" onClick={closeDrawer}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -48,16 +69,12 @@ export function SmallNavigationDrawer() {
             </svg>
           </IconButton>
         </div>
-        <List>
+        <List className="bg-white z-50">
           <Link onClick={closeDrawer} href="/">
             <ListItem>Home</ListItem>
           </Link>
           <Link onClick={closeDrawer} href="/about">
             <ListItem>About</ListItem>
-          </Link>
-
-          <Link onClick={closeDrawer} href="/products">
-            <ListItem>Products</ListItem>
           </Link>
           {user ? (
             <Link onClick={closeDrawer} href="/admin">

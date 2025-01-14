@@ -12,17 +12,29 @@ module.exports = withMT({
     "/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}",
     "./@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: "class",
+  darkMode: ["class", "class"],
   theme: {
-    extend: {
-      fontFamily: {
-        Nunito: ["Nunito"],
-        Inter: ["Inter"],
-        Sans: ["Roboto"],
-      },
-    },
+  	extend: {
+  		fontFamily: {
+  			Nunito: [
+  				'Nunito'
+  			],
+  			Inter: [
+  				'Inter'
+  			],
+  			Sans: [
+  				'Roboto'
+  			]
+  		},
+  		borderRadius: {
+  			lg: 'var(--radius)',
+  			md: 'calc(var(--radius) - 2px)',
+  			sm: 'calc(var(--radius) - 4px)'
+  		},
+  		colors: {}
+  	}
   },
-  plugins: [addVariablesForColors],
+  plugins: [addVariablesForColors, require("tailwindcss-animate")],
 });
 function addVariablesForColors({ addBase, theme }) {
   let allColors = flattenColorPalette(theme("colors"));

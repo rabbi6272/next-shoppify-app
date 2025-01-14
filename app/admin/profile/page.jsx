@@ -6,7 +6,7 @@ function Profile() {
   const user = useUserStore((state) => state.user);
   return (
     <div>
-      <h2>{user.name}</h2>
+      <h2>{user?.name}</h2>
     </div>
   );
 }

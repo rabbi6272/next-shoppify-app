@@ -23,7 +23,7 @@ export function Navbar() {
       setUser(user);
     }
     fetchUser();
-  }, []);
+  }, [user, setUser]);
 
   return (
     <nav className="flex gap-16">

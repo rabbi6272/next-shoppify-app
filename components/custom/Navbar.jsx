@@ -18,6 +18,7 @@ export function Navbar() {
         },
         credentials: "include",
       });
+      if (res.status === 401) return;
       const { user } = await res.json();
       setUser(user);
     }

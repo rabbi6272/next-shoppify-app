@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import ProductItem from "@/model/ProductSchema.model";
 import { connectDB } from "@/lib/DB/connectDB";
-import { uploadImage } from "@/lib/uploadImage";
+import { uploadImage } from "@/utils/uploadImage";
 
 export async function POST(request) {
   try {

@@ -45,11 +45,6 @@ export default function AdminLogin() {
       const { success, message, user } = await res.json();
       if (success) {
         setPending(false);
-        const savedAdmin = localStorage.getItem("user_id");
-        if (savedAdmin) {
-          localStorage.removeItem("user_id");
-        }
-        localStorage.setItem("user_id", JSON.stringify(user._id));
         setUser(user);
         toast.success(message);
         router.push("/admin");

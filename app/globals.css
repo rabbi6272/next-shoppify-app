@@ -12,6 +12,55 @@
 body {
   background-color: var(--color-primary);
 }
+/* .wrapper:hover .card {
+  opacity: 0.6;
+}
+
+.wrapper:hover .card:hover {
+  opacity: 1;
+} */
+@media (max-width: 960px) {
+  body {
+    overflow: auto;
+  }
+  .header {
+    position: sticky;
+    top: 0;
+  }
+}
+@media (min-width: 960px) {
+  body {
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 70px 1fr;
+    grid-template-areas: "header header" "sidebar main";
+  }
+  .header {
+    grid-area: "header ";
+    grid-column: 1 / -1;
+  }
+  .sidebar {
+    grid-area: "sidebar ";
+    padding: 0.5rem;
+    max-height: calc(100vh - 70px);
+  }
+  .sidebar li :hover {
+    /* background-color: #b0bec5; */
+    background-color: #e0e0e0;
+  }
+  .main {
+    grid-area: "main ";
+    border-radius: 1rem;
+    padding-top: 1rem;
+  }
+}
+
+@media (min-width: 1140px) {
+  body {
+    grid-template-columns: 250px 1fr;
+  }
+}
 
 ::-webkit-scrollbar {
   /* Customize the scrollbar width */

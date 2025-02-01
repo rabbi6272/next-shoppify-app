@@ -4,53 +4,51 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
+import { toast } from "react-toastify";
+
 import useUserStore from "@/lib/store/store";
 
-export default function AdminLoginForm() {
+export default function AdminSignup() {
   const router = useRouter();
+
+  const setUser = useUserStore((state) => state.setUser);
 
   const [pending, setPending] = useState(false);
   const [adminState, setAdminState] = useState({
+    name: "",
     email: "",
     password: "",
-    rememberme: false,
   });
-  const setUser = useUserStore((state) => state.setUser);
 
   async function handleAdminSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
+    const name = formData.get("name");
     const email = formData.get("email");
     const password = formData.get("password");
-    const name = formData.get("name");
 
     const data = {
+      name: name,
       email: email,
       password: password,
-      name: name,
     };
 
-    if (!data.email || !data.password || !data.name) {
+    if (!data.name || !data.email || !data.password) {
       return toast.error("Please fill all the fields");
     }
 
     try {
       setPending(true);
-      const res = await fetch(`/api/admin/admin-signup`, {
+      const res = await fetch(`/api/admin/adminSignup`, {
         method: "POST",
         body: formData,
       });
       const { success, message, user } = await res.json();
       if (success) {
         setPending(false);
-        const savedAdmin = localStorage.getItem("user_id");
-        if (savedAdmin) {
-          localStorage.removeItem("user_id");
-        }
-        localStorage.setItem("user_id", JSON.stringify(user_id));
         setUser(user);
         toast.success(message);
-        router.push("/admin");
+        router.push("/admin/admin-login");
       } else {
         setPending(false);
         toast.error(message);
@@ -62,11 +60,12 @@ export default function AdminLoginForm() {
       setPending(false);
     }
   }
+
   return (
     <div className="bg-inherit h-auto w-full pt-4 flex justify-center items-center">
       <form
         className="mt-6 mb-2 w-80 max-w-screen-lg sm:w-96"
-        onSubmit={handleAdminSubmit}
+        onSubmit={(e) => handleAdminSubmit(e)}
       >
         <Card color="white" shadow={"true"} className=" p-4 ">
           <Typography variant="h3" color="blue-gray" className="text-center">
@@ -78,7 +77,6 @@ export default function AdminLoginForm() {
             </Typography>
             <Input
               name="name"
-              required
               size="md"
               placeholder="John Doe"
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -95,7 +93,6 @@ export default function AdminLoginForm() {
             </Typography>
             <Input
               name="email"
-              required
               size="md"
               placeholder="name@mail.com"
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -113,7 +110,6 @@ export default function AdminLoginForm() {
             <Input
               name="password"
               type="password"
-              required
               size="md"
               placeholder="********"
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"

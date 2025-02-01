@@ -17,7 +17,7 @@ export default function Cardv2({ product }) {
           <h2 className="block antialiased text-lg text-blue-gray-900">
             {product.name}
           </h2>
-          <p className="block antialiased font-Inter text-blue-gray-900">
+          <p className="block antialiased text-base font-Inter text-blue-gray-900">
             {product.price}$
           </p>
         </div>

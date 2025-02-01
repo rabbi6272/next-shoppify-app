@@ -1,6 +1,4 @@
-import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
 import withMT from "@material-tailwind/react/utils/withMT";
-
 export default withMT({
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,16 +11,5 @@ export default withMT({
   theme: {
     extend: {},
   },
-  plugins: [addVariablesForColors, require("flowbite/plugin")],
+  plugins: [require("flowbite/plugin")],
 });
-
-function addVariablesForColors({ addBase, theme }) {
-  let allColors = flattenColorPalette(theme("colors"));
-  let newVars = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-  );
-
-  addBase({
-    ":root": newVars,
-  });
-}

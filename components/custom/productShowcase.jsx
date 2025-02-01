@@ -16,9 +16,9 @@ export default async function ProductShowcase() {
       <h3 className="text-lg font-bold text-center">
         Found {data?.length} products
       </h3>
-      <ul className="min-h-screen w-full px-2 pt-2 md:px-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4">
+      <ul className="wrapper min-h-screen w-full px-2 pt-2 md:px-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4">
         {data?.map((product) => (
-          <li key={product._id}>
+          <li key={product._id} className="card">
             <ProductCard product={product} />
           </li>
         ))}

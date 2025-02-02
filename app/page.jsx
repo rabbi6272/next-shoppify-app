@@ -1,5 +1,7 @@
-import ProductShowcase from "@/components/custom/productShowcase";
-
 export default function Home() {
-  return <ProductShowcase />;
+  return (
+    <div className="min-h-screen w-full flex flex-col items-center justify-center gap-4">
+      <h1 className="text-3xl font-bold ">This is Home Page</h1>
+    </div>
+  );
 }

@@ -1,5 +1,12 @@
 import Image from "next/image";
 import React from "react";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
 
 export default function ProductCard({ product }) {
   return (
@@ -14,7 +21,9 @@ export default function ProductCard({ product }) {
         />
       </div>
       <div className="px-3 pb-4">
-        <h5 className="py-2 text-xl md:text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+        <h5
+          className={` ${inter.className} text-lg py-2 md:text-xl font-inter font-semibold tracking-tight text-gray-900 dark:text-white`}
+        >
           {product.name}
         </h5>
         <div className="flex items-center justify-between">
@@ -23,9 +32,9 @@ export default function ProductCard({ product }) {
           </span>
           <button
             type="button"
-            className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-3 md:px-4 py-2 md:py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-lg px-6 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
-            Add to cart
+            <i class="fa-solid fa-cart-shopping"></i>
           </button>
         </div>
       </div>

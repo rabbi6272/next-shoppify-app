@@ -9,7 +9,11 @@ export default withMT({
   ],
   darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        inter: ["Inter"],
+      },
+    },
   },
   plugins: [require("flowbite/plugin")],
 });

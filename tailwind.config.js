@@ -1,4 +1,6 @@
 import withMT from "@material-tailwind/react/utils/withMT";
+import flowbite from "flowbite-react/tailwind";
+
 export default withMT({
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -6,6 +8,7 @@ export default withMT({
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}",
     "./@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}",
+    flowbite.content(),
   ],
   darkMode: "class",
   theme: {
@@ -15,5 +18,5 @@ export default withMT({
       },
     },
   },
-  plugins: [require("flowbite/plugin")],
+  plugins: [flowbite.plugin()],
 });

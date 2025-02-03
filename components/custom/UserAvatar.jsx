@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "motion/react";
 
 import useUserStore from "@/lib/store/store";
+import { CldImage } from "next-cloudinary";
 
 function UserComponent() {
   const user = useUserStore((state) => state.user);
@@ -15,12 +15,13 @@ function UserComponent() {
           <Link href="/admin/profile">
             <div className="w-[50px] h-[50px] overflow-hidden rounded-full cursor-pointer">
               {user.image_url ? (
-                <Image
-                  cover
+                <CldImage
+                  crop={"fill"}
                   width={50}
                   height={50}
+                  gravity="face"
+                  src={user.image_id}
                   alt="user image"
-                  src={user.image_url}
                 />
               ) : (
                 <svg
@@ -66,7 +67,7 @@ export function UserAvatar() {
       animate={{ opacity: 1, scale: 1 }}
       transition={{
         duration: 0.8,
-        scale: { type: "spring", visualDuration: 0.8, bounce: 0.5 },
+        scale: { type: "spring", visualDuration: 0.8, bounce: 0.1 },
       }}
     >
       <UserComponent />

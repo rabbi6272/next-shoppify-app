@@ -1,4 +1,3 @@
-import Loader from "./Loader";
 import ProductCard from "./productCard";
 
 export default async function ProductShowcase() {
@@ -11,7 +10,7 @@ export default async function ProductShowcase() {
   );
   const { data } = await res.json();
 
-  return data ? (
+  return (
     <div className="">
       <h1 className="text-xl lg:text-3xl font-semibold lg:font-bold text-center">
         All Products
@@ -27,7 +26,5 @@ export default async function ProductShowcase() {
         ))}
       </ul>
     </div>
-  ) : (
-    <Loader />
   );
 }

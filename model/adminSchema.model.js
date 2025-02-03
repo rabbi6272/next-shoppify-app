@@ -16,9 +16,15 @@ const adminSchema = new mongoose.Schema(
     },
     image_url: {
       type: String,
+      default: "",
     },
     image_id: {
       type: String,
+      default: "",
+    },
+    role: {
+      type: String,
+      default: "user",
     },
   },
   { timestamps: true }

@@ -34,6 +34,9 @@ export async function POST(request) {
       name: name,
       email: email,
       password: hashedPassword,
+      image_url: "",
+      image_id: "",
+      role: "",
     });
 
     await newAdmin.save();

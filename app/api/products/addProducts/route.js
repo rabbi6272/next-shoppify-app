@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import ProductItem from "@/model/ProductSchema.model";
 import { connectDB } from "@/lib/DB/connectDB";
 import { uploadImage } from "@/utils/uploadImage";
+import { revalidatePath } from "next/cache";
 
 export async function POST(request) {
   try {
@@ -16,7 +17,7 @@ export async function POST(request) {
       );
     }
 
-    const imageUploadResult = await uploadImage(file);
+    const imageUploadResult = await uploadImage(file, "products");
 
     if (imageUploadResult.error) {
       return NextResponse.json(
@@ -36,6 +37,8 @@ export async function POST(request) {
 
     const product = new ProductItem(body);
     await product.save();
+
+    revalidatePath("/api/products/getProducts");
 
     return NextResponse.json(
       { success: true, message: "Product added successfully" },

@@ -5,7 +5,6 @@ import { SmallNavigationDrawer } from "@/components/custom/smallNavbar";
 import { Slide, ToastContainer } from "react-toastify";
 import { Analytics } from "@vercel/analytics/react";
 import { UserDataFetcher } from "@/components/custom/DataFetcher";
-import { MobileNavbar } from "@/components/custom/MobileNavbar";
 import Sidebar from "@/components/custom/Sidebar";
 
 export const metadata = {

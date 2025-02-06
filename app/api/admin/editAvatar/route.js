@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Admin from "@/model/adminSchema.model";
 import jwt from "jsonwebtoken";
 import { connectDB } from "@/lib/DB/connectDB";
-import { uploadImage } from "@/utils/uploadImage";
+import { uploadAdminAvatar } from "@/utils/uploadImage";
 import { deleteImage } from "@/utils/deleteImage";
 
 export async function POST(NextRequest) {
@@ -30,7 +30,7 @@ export async function POST(NextRequest) {
       await deleteImage(admin.image_id);
     }
 
-    const result = await uploadImage(file, "admin");
+    const result = await uploadAdminAvatar(file, "admin");
     const newQuery = {
       image_url: result.result.secure_url,
       image_id: result.result.public_id,

@@ -16,6 +16,13 @@ export default withMT({
       fontFamily: {
         inter: ["Inter"],
       },
+      colors: {
+        primary: "#fbe4d8",
+        secondary: "#dfb6b2",
+        buttonPrimary: "#522b88",
+        buttonSecondary: "#2b124c",
+        text: "#190019",
+      },
     },
   },
   plugins: [flowbite.plugin()],

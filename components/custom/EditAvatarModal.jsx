@@ -11,7 +11,6 @@ import {
 import { FileInput, Label } from "flowbite-react";
 import { toast } from "react-toastify";
 import useUserStore from "@/lib/store/store";
-import { set } from "mongoose";
 
 export function EditAvatarModal() {
   const setUser = useUserStore((state) => state.setUser);
@@ -56,17 +55,18 @@ export function EditAvatarModal() {
       }
     } catch (error) {
       toast.error("Something went wrong");
+      handleOpen();
     }
   }
 
   return (
     <>
-      <Button
+      <span
         onClick={handleOpen}
-        className="bg-blue-400 absolute bottom-[5%] left-[5%] rounded-full"
+        className="bg-blue-500 w-[45px] lg:w-[50px] h-[45px] lg:h-[50px] grid place-items-center absolute bottom-[5%] right-[5%] rounded-full text-white cursor-pointer hover:bg-blue-600"
       >
-        Edit
-      </Button>
+        <i className="fa-regular fa-pen-to-square fa-lg"></i>
+      </span>
       <Dialog
         open={open}
         handler={handleOpen}

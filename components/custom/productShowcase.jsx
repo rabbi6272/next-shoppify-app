@@ -3,13 +3,9 @@ import ProductCard from "./productCard";
 export default async function ProductShowcase() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/getProducts`,
-    {
-      method: "GET",
-      cache: "no-store",
-    }
+    { method: "GET" }
   );
   const { data } = await res.json();
-
   return (
     <div className="">
       <h1 className="text-xl lg:text-3xl font-semibold lg:font-bold text-center">

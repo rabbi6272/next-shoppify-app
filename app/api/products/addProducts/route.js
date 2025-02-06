@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import ProductItem from "@/model/ProductSchema.model";
 import { connectDB } from "@/lib/DB/connectDB";
-import { uploadImage } from "@/utils/uploadImage";
+import { uploadProductImage } from "@/utils/uploadImage";
 import { revalidatePath } from "next/cache";
 
 export async function POST(request) {
@@ -17,7 +17,7 @@ export async function POST(request) {
       );
     }
 
-    const imageUploadResult = await uploadImage(file, "products");
+    const imageUploadResult = await uploadProductImage(file);
 
     if (imageUploadResult.error) {
       return NextResponse.json(

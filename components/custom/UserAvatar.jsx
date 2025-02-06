@@ -12,49 +12,45 @@ function UserComponent() {
     <>
       {user ? (
         <div>
-          <Link href="/admin/profile">
-            <div className="w-[50px] h-[50px] overflow-hidden rounded-full cursor-pointer">
-              {user.image_url ? (
-                <CldImage
-                  crop={"fill"}
-                  width={50}
-                  height={50}
-                  gravity="face"
-                  src={user.image_id}
-                  alt="user image"
-                />
-              ) : (
-                <svg
-                  className="h-[50px] w-[50px] rounded-full p-1 bg-gray-300 text-gray-400 "
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              )}
-            </div>
-          </Link>
+          <div className="w-[50px] h-[50px] overflow-hidden rounded-full cursor-pointer">
+            {user.image_url ? (
+              <CldImage
+                crop={"fill"}
+                width={50}
+                height={50}
+                gravity="face"
+                src={user.image_id}
+                alt="user image"
+              />
+            ) : (
+              <svg
+                className="h-[50px] w-[50px] rounded-full p-1 bg-gray-300 text-gray-400 "
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+            )}
+          </div>
         </div>
       ) : (
-        <Link href="/admin/admin-login">
-          <svg
-            className="h-[50px] w-[50px] rounded-full p-1 bg-gray-300 text-gray-400 "
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        </Link>
+        <svg
+          className="h-[50px] w-[50px] rounded-full p-1 bg-gray-300 text-gray-400 "
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fillRule="evenodd"
+            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+            clipRule="evenodd"
+          ></path>
+        </svg>
       )}
     </>
   );

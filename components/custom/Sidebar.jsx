@@ -1,18 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { CldImage } from "next-cloudinary";
 import React from "react";
+import { Inter } from "next/font/google";
 
-import useUserStore from "@/lib/store/store";
 import { UserAvatar } from "./UserAvatar";
+import useUserStore from "@/lib/store/store";
+
+const inter = Inter({ subsets: ["latin"] });
 
 function Sidebar() {
   const user = useUserStore((state) => state.user);
-  const setUser = useUserStore((state) => state.setUser);
 
   return (
-    <ul className="w-full flex flex-col justify-between ">
+    <ul className="w-full flex flex-col justify-between">
       <div className="space-y-2 font-medium">
         <li>
           <Link
@@ -108,17 +109,22 @@ function Sidebar() {
       </div>
 
       {user && (
-        <Link
-          href="/admin/profile"
-          className="w-full flex gap-2 items-center p-2 bg-blue-gray-50 cursor-pointer"
-        >
-          <UserAvatar />
+        <div>
+          <Link
+            href="/admin/profile"
+            className="avatar-container w-full flex gap-2 items-center p-2 rounded-md cursor-pointer"
+          >
+            <UserAvatar />
 
-          <span>
-            <p className="text-sm font-semibold"> {user?.name}</p>
-            <p className="text-xs">{user?.email}</p>
-          </span>
-        </Link>
+            <span>
+              <p className={` ${inter.className} text-sm  font-semibold`}>
+                {" "}
+                {user?.name}
+              </p>
+              <p className="text-xs">{user?.email}</p>
+            </span>
+          </Link>
+        </div>
       )}
     </ul>
   );

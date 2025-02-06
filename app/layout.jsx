@@ -1,10 +1,9 @@
 import Link from "next/link";
 import "./globals.css";
-import { Nunito } from "next/font/google";
+import { Nunito, Inter } from "next/font/google";
 import { SmallNavigationDrawer } from "@/components/custom/smallNavbar";
 import { Slide, ToastContainer } from "react-toastify";
 import { Analytics } from "@vercel/analytics/react";
-import { UserDataFetcher } from "@/components/custom/DataFetcher";
 import Sidebar from "@/components/custom/Sidebar";
 
 export const metadata = {
@@ -16,6 +15,8 @@ const nunito = Nunito({
   subsets: ["latin"],
   display: "swap",
 });
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default async function RootLayout({ children }) {
   return (
@@ -30,24 +31,22 @@ export default async function RootLayout({ children }) {
         />
       </head>
       <body className={`${nunito.className} h-screen`}>
-        <UserDataFetcher />
         <header className="header z-10 w-full h-[70px] px-4 md:px-8 bg-inherit flex items-center justify-between text-black">
           <Link href="/">
-            <h1 className="text-3xl font-bold ">Shopping Cart</h1>
+            <h1 className={`${inter.className} text-3xl font-bold `}>
+              Shopping Cart
+            </h1>
           </Link>
           <div>
             <span className="block lg:hidden">
               <SmallNavigationDrawer />
             </span>
-            {/* <span className="hidden md:block">
-              <Navbar />
-            </span> */}
           </div>
         </header>
         <section className="sidebar hidden lg:flex overflow-hidden">
           <Sidebar />
         </section>
-        <main className="main min-h-screen overflow-y-auto bg-blue-gray-50">
+        <main className="main overflow-y-auto ">
           {children}
           <Analytics />
         </main>

@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 :root {
+  /* --color-primary: #fbe4d8;
+  --color-secondary: #dfb6b2;
+  --color-tertiary: #00adc1;
+  --color-quaternary: #2d7282;
+  --color-text: #190019; */
   --color-primary: #f1f2f2;
   --color-secondary: #c8d8e1;
   --color-tertiary: #00adc1;
@@ -11,14 +16,15 @@
 
 body {
   background-color: var(--color-primary);
+  color: var(--color-text);
 }
-/* .wrapper:hover .card {
-  opacity: 0.6;
+.avatar-container {
+  background-color: var(--color-secondary);
+}
+main {
+  background-color: var(--color-secondary);
 }
 
-.wrapper:hover .card:hover {
-  opacity: 1;
-} */
 @media (max-width: 960px) {
   body {
     overflow: auto;
@@ -46,13 +52,13 @@ body {
     max-height: calc(100vh - 70px);
   }
   .sidebar li :hover {
-    /* background-color: #b0bec5; */
-    background-color: #e0e0e0;
+    background-color: var(--color-secondary);
+    /* background-color: #e0e0e0; */
   }
   .main {
     grid-area: "main ";
-    border-radius: 1rem;
-    padding-top: 1rem;
+    border-radius: 1rem 0 0 0;
+    padding: 1rem 0;
   }
 }
 

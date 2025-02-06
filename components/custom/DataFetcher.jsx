@@ -4,6 +4,7 @@ import useUserStore from "@/lib/store/store";
 
 export function UserDataFetcher() {
   const setUser = useUserStore((state) => state.setUser);
+  const user = useUserStore((state) => state.user);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -17,7 +18,7 @@ export function UserDataFetcher() {
       }
     };
     fetchUser();
-  }, []);
+  }, [setUser]);
 
   return null;
 }

@@ -81,7 +81,7 @@ export default function Home() {
             offers.
           </p>
           <div className="max-w-md mx-auto">
-            <div className="flex gap-4">
+            <div className="flex gap-2 lg:gap-4 flex-col lg:flex-row">
               <input
                 type="email"
                 placeholder="Enter your email"

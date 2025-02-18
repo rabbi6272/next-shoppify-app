@@ -1,6 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
+import { Inter } from "next/font/google";
 
+const inter = Inter({ subsets: ["latin"] });
 export default function AboutPageComponent() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
@@ -11,8 +13,10 @@ export default function AboutPageComponent() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-            About <span className="text-indigo-600">ShoppingCart</span>
+          <h1
+            className={` ${inter.className} text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl`}
+          >
+            About <span className="text-buttonPrimary">ShoppingCart</span>
           </h1>
           <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
             Your premier destination for seamless online shopping experience
@@ -97,7 +101,7 @@ export default function AboutPageComponent() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, duration: 0.3 }}
-            className="bg-indigo-600 text-white px-8 py-3 rounded-full font-medium hover:bg-indigo-700 transition duration-300"
+            className="bg-buttonPrimary hover:bg-buttonSecondary text-white px-8 py-3 rounded-full font-medium transition duration-300"
           >
             Explore Products
           </motion.button>

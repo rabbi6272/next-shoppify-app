@@ -21,9 +21,9 @@ body {
 .avatar-container {
   background-color: var(--color-secondary);
 }
-main {
+/* main {
   background-color: var(--color-secondary);
-}
+} */
 
 @media (max-width: 960px) {
   body {
@@ -58,7 +58,6 @@ main {
   .main {
     grid-area: "main ";
     border-radius: 1rem 0 0 0;
-    padding: 1rem 0;
   }
 }
 

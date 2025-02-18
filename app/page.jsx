@@ -1,29 +1,35 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { Inter } from "next/font/google";
+
 import { motion } from "framer-motion";
 import { UserDataFetcher } from "@/components/custom/DataFetcher";
+
+const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-primary to-secondary">
       <UserDataFetcher />
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 flex flex-col lg:flex-row items-center justify-between">
+      <section className="container mx-auto px-4 py-10 flex flex-col lg:flex-row items-center justify-between">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
           className="lg:w-1/2 space-y-6"
         >
-          <h1 className="text-5xl lg:text-7xl font-bold text-buttonSecondary">
+          <h1
+            className={`${inter.className} text-5xl lg:text-7xl font-extrabold text-buttonSecondary`}
+          >
             Discover Unique Fashion
           </h1>
-          <p className="text-xl text-text">
+          <p className="text-xl text-text py-2">
             Explore our curated collection of trendy and timeless pieces that
             define your style.
           </p>
           <Link href="/products">
-            <button className="bg-buttonPrimary hover:bg-buttonSecondary text-white px-8 py-3 rounded-full transition-all duration-300 text-lg">
+            <button className="bg-buttonPrimary hover:bg-buttonSecondary text-white px-8 py-2 rounded-full transition-all duration-300 text-lg">
               Shop Now
             </button>
           </Link>
@@ -38,6 +44,7 @@ export default function Home() {
           <Image
             src="https://i.pinimg.com/736x/8d/16/54/8d1654a089984fed2bf7aea8cb3e1822.jpg"
             alt="Fashion Collection"
+            priority
             width={600}
             height={600}
             className="rounded-2xl shadow-xl"

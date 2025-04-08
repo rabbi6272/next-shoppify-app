@@ -1,10 +1,10 @@
 import Link from "next/link";
 import "./globals.css";
 import { Nunito, Inter } from "next/font/google";
-import { SmallNavigationDrawer } from "@/components/custom/smallNavbar";
+import { SmallNavigationDrawer } from "@/components/sidebar/smallNavbar";
 import { Slide, ToastContainer } from "react-toastify";
 import { Analytics } from "@vercel/analytics/react";
-import Sidebar from "@/components/custom/Sidebar";
+import Sidebar from "@/components/sidebar/Sidebar";
 
 export const metadata = {
   title: "Shopping Cart || shop anything anytime",

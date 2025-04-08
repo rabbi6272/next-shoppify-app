@@ -46,8 +46,8 @@ export default function AdminLogin() {
       if (success) {
         setPending(false);
         setUser(user);
-        toast.success(message);
         router.push("/admin/dashboard");
+        toast.success(message);
       } else {
         setPending(false);
         toast.error(message);

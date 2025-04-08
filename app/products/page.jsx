@@ -1,5 +1,5 @@
 import React from "react";
-import ProductShowcase from "@/components/custom/productShowcase";
+import ProductShowcase from "./productShowcase";
 
 function Products() {
   return <ProductShowcase />;

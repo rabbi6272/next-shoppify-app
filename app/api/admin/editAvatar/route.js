@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Admin from "@/model/adminSchema.model";
 import jwt from "jsonwebtoken";
 import { connectDB } from "@/lib/DB/connectDB";
-import { uploadAdminAvatar } from "@/utils/uploadImage";
+import { uploadAdminAvatar } from "@/utils/uploadAdminImage";
 import { deleteImage } from "@/utils/deleteImage";
 
 export async function POST(NextRequest) {
@@ -26,14 +26,14 @@ export async function POST(NextRequest) {
       return NextResponse.json({ message: "Admin not found" }, { status: 404 });
     }
 
-    if (admin.avatar !== undefined) {
+    if (admin.image_url && admin.image_id) {
       await deleteImage(admin.image_id);
     }
 
-    const result = await uploadAdminAvatar(file, "admin");
+    const request = await uploadAdminAvatar(file);
     const newQuery = {
-      image_url: result.result.secure_url,
-      image_id: result.result.public_id,
+      image_url: request.secure_url,
+      image_id: request.public_id,
     };
 
     const updatedAdmin = await Admin.findByIdAndUpdate(

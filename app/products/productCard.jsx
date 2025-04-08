@@ -1,8 +1,7 @@
 "use client";
-import React, { useContext } from "react";
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import { CldImage } from "next-cloudinary";
+import { motion } from "framer-motion";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,7 +13,11 @@ export default function ProductCard({ product }) {
   if (!product) return null;
 
   return (
-    <div className="w-full h-auto max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:drop-shadow-xl">
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      transition={{ duration: 0.2 }}
+      className="w-full h-auto max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:drop-shadow-xl cursor-pointer"
+    >
       <div className="relative h-[290px] md:h-[300px] w-full">
         <CldImage
           fill
@@ -31,17 +34,21 @@ export default function ProductCard({ product }) {
           {product?.name}
         </h5>
         <div className="flex items-center justify-between">
-          <span className="text-base md:text-lg font-semibold text-gray-900 dark:text-white">
+          <span
+            className={`${inter.className} text-base md:text-lg  text-gray-900 dark:text-white`}
+          >
             {product?.price}$
           </span>
-          <button
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-lg px-6 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 200, duration: 0.3 }}
+            className="text-white bg-buttonPrimary hover:bg-buttonSecondary font-medium rounded-full text-lg px-6 py-1.5 text-center "
           >
             <i className="fa-solid fa-cart-shopping"></i>
-          </button>
+          </motion.button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

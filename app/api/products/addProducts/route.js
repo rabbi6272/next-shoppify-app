@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import ProductItem from "@/model/ProductSchema.model";
 import { connectDB } from "@/lib/DB/connectDB";
-import { uploadProductImage } from "@/utils/uploadImage";
+import { uploadProductImage } from "@/utils/uploadProductImage";
 import { revalidatePath } from "next/cache";
 
 export async function POST(request) {
@@ -31,8 +31,8 @@ export async function POST(request) {
       name: formData.get("name"),
       price: formData.get("price"),
       category: formData.get("category"),
-      image_url: imageUploadResult.result.secure_url,
-      image_id: imageUploadResult.result.public_id,
+      image_url: imageUploadResult.secure_url,
+      image_id: imageUploadResult.public_id,
     };
 
     const product = new ProductItem(body);

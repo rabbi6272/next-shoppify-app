@@ -5,7 +5,7 @@ import "@splidejs/react-splide/css";
 
 export default function HeroSlideshow() {
   return (
-    <div className="w-full h-[45vh] md:h-[80vh] xl:h-[100vh]">
+    <div className="w-full h-[35vh] md:h-[80vh] xl:h-[100vh]">
       <Splide
         options={{
           type: "loop",

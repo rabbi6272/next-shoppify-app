@@ -46,7 +46,7 @@ export default async function RootLayout({ children }) {
         <section className="sidebar hidden lg:flex overflow-hidden">
           <Sidebar />
         </section>
-        <main className="main overflow-y-auto">
+        <main className="main overflow-y-auto overflow-x-hidden">
           {children}
           <Analytics />
         </main>

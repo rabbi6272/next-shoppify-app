@@ -18,7 +18,7 @@ export function UserDataFetcher() {
       }
     };
     fetchUser();
-  }, [setUser]);
+  }, []);
 
   return null;
 }

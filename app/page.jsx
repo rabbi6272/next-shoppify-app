@@ -2,14 +2,69 @@
 
 import { motion } from "framer-motion";
 import { UserDataFetcher } from "@/components/custom/DataFetcher";
-import HeroSlideshow from "@/app/Herosection";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
 
 export default function Home() {
   return (
-    <div className="h-auto">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="h-auto"
+    >
       <UserDataFetcher />
+
       {/* Hero Section */}
-      <HeroSlideshow />
+      <div className="w-full h-[40vh] md:h-[80vh] xl:h-[100vh]">
+        <Splide
+          options={{
+            type: "loop",
+            rewind: true,
+            rewindSpeed: 3000,
+            autoplay: true,
+            interval: 2500,
+            arrows: false,
+            pagination: true,
+            speed: 300,
+            pauseOnHover: false,
+          }}
+          className="w-full h-full"
+        >
+          <SplideSlide className="relative w-full h-screen">
+            <img
+              src="https://res.cloudinary.com/ddtd7avvo/image/upload/v1740459706/0-online-shopping-sales-infographics___media_library_original_1600_900_ikndda.jpg"
+              alt="Slide 1"
+              className="absolute w-fullobject-cover"
+            />
+          </SplideSlide>
+
+          <SplideSlide className="relative w-full h-screen">
+            <img
+              src="https://res.cloudinary.com/ddtd7avvo/image/upload/v1740459792/0-sales-strategy-and-digital-marketing___media_library_original_1600_900_uvgv8v.jpg"
+              alt="Slide 2"
+              className="absolute w-full object-cover"
+            />
+          </SplideSlide>
+
+          <SplideSlide className="relative w-full h-screen">
+            <img
+              src="https://res.cloudinary.com/ddtd7avvo/image/upload/v1740459846/0-online-minimarket-social-media-strategy___media_library_original_1600_900_hnbhmr.jpg"
+              alt="Slide 3"
+              className="absolute w-full object-cover"
+            />
+          </SplideSlide>
+
+          <SplideSlide className="relative w-full h-screen">
+            <img
+              src="https://res.cloudinary.com/ddtd7avvo/image/upload/v1740459939/0-shopping-center-sales___media_library_original_1600_900_jies32.jpg"
+              alt="Slide 4"
+              className="absolute w-full object-cover"
+            />
+          </SplideSlide>
+        </Splide>
+      </div>
 
       {/* Features Section */}
       <section className="py-16 bg-gradient-to-b from-background to-gray-900">
@@ -95,7 +150,7 @@ export default function Home() {
           </div>
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -119,77 +174,3 @@ const features = [
       "Stream your favorite movies on any device, anytime, with our responsive platform.",
   },
 ];
-
-// "use client";
-
-// import { motion } from "framer-motion";
-// import { UserDataFetcher } from "@/components/custom/DataFetcher";
-// import HeroSlideshow from "@/app/Herosection";
-
-// export default function Home() {
-//   return (
-//     <div className="h-auto">
-//       <UserDataFetcher />
-//       {/* Hero Section */}
-//       <HeroSlideshow />
-
-//       {/* Features Section */}
-
-//       {/* Newsletter Section */}
-//       <motion.div
-//         initial={{ opacity: 0, y: 20 }}
-//         animate={{ opacity: 1, y: 0 }}
-//         transition={{ duration: 0.5 }}
-//         className="bg-buttonPrimary text-white py-7"
-//       >
-//         <div className="container mx-auto px-4 text-center">
-//           <h2 className="text-3xl lg:text-4xl font-semibold mb-2 lg:mb-4">
-//             Stay Updated
-//           </h2>
-//           <p className="mb-8">
-//             Subscribe to our newsletter for the latest updates and exclusive
-//             offers.
-//           </p>
-//           <div className="max-w-md mx-auto">
-//             <div className="flex gap-2 lg:gap-4 flex-col md:flex-row">
-//               <input
-//                 type="email"
-//                 placeholder="Enter your email"
-//                 className="flex-1 px-4 py-2 rounded-full text-text focus:outline-none"
-//               />
-//               <motion.button
-//                 whileHover={{ scale: 1.05 }}
-//                 whileTap={{ scale: 0.95 }}
-//                 transition={{ type: "spring", stiffness: 100, duration: 0.3 }}
-//                 className="bg-black px-6 py-2 rounded-full "
-//               >
-//                 Subscribe
-//               </motion.button>
-//             </div>
-//           </div>
-//         </div>
-//       </motion.div>
-//     </div>
-//   );
-// }
-
-// const features = [
-//   {
-//     icon: "🛍️",
-//     title: "Quality Products",
-//     description:
-//       "Carefully selected items that meet our high standards of quality and style.",
-//   },
-//   {
-//     icon: "🚚",
-//     title: "Fast Delivery",
-//     description:
-//       "Quick and reliable shipping to get your favorite items to you as soon as possible.",
-//   },
-//   {
-//     icon: "💎",
-//     title: "Best Prices",
-//     description:
-//       "Competitive prices and regular deals to give you the best value for your money.",
-//   },
-// ];

@@ -18,7 +18,6 @@ export async function POST(request) {
     }
 
     const imageUploadResult = await uploadProductImage(file);
-
     if (imageUploadResult.error) {
       return NextResponse.json(
         { error: imageUploadResult.error },

@@ -8,8 +8,10 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { FileInput, Label } from "flowbite-react";
+
+// import { Input } from "@/components/ui/input";
+// import { Label } from "@/components/ui/label";
 import { toast } from "react-toastify";
 import useUserStore from "@/lib/store/store";
 
@@ -82,17 +84,10 @@ export function EditAvatarModal() {
             Edit Profile Picture
           </DialogHeader>
           <DialogBody>
-            <Label htmlFor="picture">Picture</Label>
-            <Input id="picture" type="file" required onChange={handleChange} />
-            {/* <Input
-              label="Profile Picture"
-              type="file"
-              name="file"
-              accept="image/*"
-              required
-              className="border-none"
-              onChange={handleChange}
-            /> */}
+            <Label className="mb-2 block" htmlFor="file-upload">
+              Upload file
+            </Label>
+            <FileInput id="file-upload" onChange={handleChange} name="file" />
           </DialogBody>
           <DialogFooter>
             <Button

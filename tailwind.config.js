@@ -1,12 +1,14 @@
 import withMT from "@material-tailwind/react/utils/withMT";
+const flowbiteReact = require("flowbite-react/plugin/tailwindcss");
 
 export default withMT({
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}",
-    "./@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}",
+      "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+      "./components/**/*.{js,ts,jsx,tsx,mdx}",
+      "./app/**/*.{js,ts,jsx,tsx,mdx}",
+      "/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}",
+      "./@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}",
+      ".flowbite-react\\class-list.json"
   ],
   darkMode: ["class", "class"],
   theme: {
@@ -63,5 +65,5 @@ export default withMT({
   		}
   	}
   },
-    plugins: [require("tailwindcss-animate")]
+    plugins: [require("tailwindcss-animate"), flowbiteReact]
 });

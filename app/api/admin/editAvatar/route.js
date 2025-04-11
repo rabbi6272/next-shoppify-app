@@ -13,6 +13,7 @@ export async function POST(NextRequest) {
 
   const formData = await NextRequest.formData();
   const file = formData.get("file");
+  console.log(file);
 
   if (!file) {
     return NextResponse.json({ message: "No file found" }, { status: 400 });

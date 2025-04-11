@@ -8,8 +8,24 @@ cloudinary.config({
 
 export async function uploadAdminAvatar(file) {
   try {
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    let buffer;
+    // Check if file is a File/Blob with arrayBuffer method
+    if (file && typeof file.arrayBuffer === "function") {
+      const bytes = await file.arrayBuffer();
+      buffer = Buffer.from(bytes);
+    }
+    // Check if file is already a buffer
+    else if (Buffer.isBuffer(file)) {
+      buffer = file;
+    }
+    // Check if file is a string (possibly a base64 data URL)
+    else if (typeof file === "string" && file.startsWith("data:")) {
+      // Handle base64 data URL
+      const base64Data = file.split(",")[1];
+      buffer = Buffer.from(base64Data, "base64");
+    } else {
+      throw new Error("Invalid file format");
+    }
 
     const result = await new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(

@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { UserDataFetcher } from "@/components/custom/DataFetcher";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
@@ -14,7 +13,6 @@ export default function Home() {
       transition={{ duration: 0.5 }}
       className="h-auto"
     >
-      <UserDataFetcher />
 
       {/* Hero Section */}
       <div className="w-full h-[40vh] md:h-[80vh] xl:h-[100vh]">
@@ -36,7 +34,7 @@ export default function Home() {
             <img
               src="https://res.cloudinary.com/ddtd7avvo/image/upload/v1740459706/0-online-shopping-sales-infographics___media_library_original_1600_900_ikndda.jpg"
               alt="Slide 1"
-              className="absolute w-fullobject-cover"
+              className="absolute w-full object-cover"
             />
           </SplideSlide>
 

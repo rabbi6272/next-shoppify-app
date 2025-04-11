@@ -9,6 +9,7 @@ import Sidebar from "@/components/sidebar/Sidebar";
 
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { UserDataFetcher } from "@/components/custom/DataFetcher";
 
 export const metadata = {
   title: "Shopping Cart || shop anything anytime",
@@ -35,6 +36,8 @@ export default async function RootLayout({ children }) {
         />
       </head>
       <body className={`${nunito.className} h-screen`}>
+        <UserDataFetcher />
+
         <header className="header z-10 w-full h-[70px] px-4 md:px-8 bg-inherit flex items-center justify-between text-black">
           <Link href="/">
             <h1 className={`${inter.className} text-3xl font-bold `}>

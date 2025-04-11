@@ -6,8 +6,8 @@ import Admin from "@/model/adminSchema.model";
 import { connectDB } from "@/lib/DB/connectDB";
 
 export async function GET(request) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("token")?.value;
+  const cookieStore = cookies();
+  const token = cookieStore.get("Admin-token")?.value;
 
   if (!token) {
     return NextResponse.json({ message: "No token provided", success: false });

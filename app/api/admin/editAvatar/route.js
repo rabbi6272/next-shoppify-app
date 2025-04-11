@@ -6,7 +6,7 @@ import { uploadAdminAvatar } from "@/utils/uploadAdminImage";
 import { deleteImage } from "@/utils/deleteImage";
 
 export async function POST(NextRequest) {
-  const token = NextRequest.cookies.get("token")?.value;
+  const token = NextRequest.cookies.get("Admin-token")?.value;
   if (!token) {
     return NextResponse.json({ message: "Not authorized" }, { status: 401 });
   }

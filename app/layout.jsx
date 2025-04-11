@@ -1,10 +1,14 @@
-import Link from "next/link";
 import "./globals.css";
+
+import Link from "next/link";
 import { Nunito, Inter } from "next/font/google";
+
 import { SmallNavigationDrawer } from "@/components/sidebar/smallNavbar";
 import { Slide, ToastContainer } from "react-toastify";
-import { Analytics } from "@vercel/analytics/react";
 import Sidebar from "@/components/sidebar/Sidebar";
+
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
   title: "Shopping Cart || shop anything anytime",
@@ -49,6 +53,7 @@ export default async function RootLayout({ children }) {
         <main className="main overflow-y-auto overflow-x-hidden">
           {children}
           <Analytics />
+          <SpeedInsights />
         </main>
         <ToastContainer
           position="top-right"

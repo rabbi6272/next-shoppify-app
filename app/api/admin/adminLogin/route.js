@@ -54,11 +54,11 @@ export async function POST(request) {
     );
 
     response.cookies.set({
-      name: "token",
+      name: "Admin-token",
       value: token,
       httpOnly: true,
       secure: true,
-      maxAge: rememberme ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000,
+      maxAge: rememberme ? 30 * 24 * 60 * 60 : 24 * 60 * 60,
       sameSite: "strict",
     });
 

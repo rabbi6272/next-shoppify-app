@@ -38,10 +38,13 @@ export default function AdminLogin() {
 
     try {
       setPending(true);
-      const res = await fetch(`/api/admin/adminLogin`, {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/adminLogin`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
       const { success, message, user } = await res.json();
       if (success) {
         setPending(false);

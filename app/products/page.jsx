@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import ProductCard from "./productCard";
 
 export default async function Products() {
@@ -10,16 +9,23 @@ export default async function Products() {
 
   return (
     <div className="">
-      <h1 className="text-xl lg:text-3xl font-semibold lg:font-bold text-center">
-        All Products
-      </h1>
-      <h3 className="text-md lg:text-lg font-normal lg:font-bold text-center">
-        Found {data.length} products
-      </h3>
+      <div className="w-full px-2">
+        <label htmlFor="sort">Sort:</label>
+        <select
+          name="sort"
+          id="sort"
+          className="w-[150px]  rounded-md border-2 border-blue-gray-300 focus:outline-none"
+        >
+          <option value="smartphones">Smartphones</option>
+          <option value="electronics">Electronics</option>
+          <option value="food">Food</option>
+        </select>
+      </div>
+
       <ul className="wrapper min-h-screen w-full px-2 pt-2 md:px-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4">
         {data.map((product) => (
           <li key={product._id} className="card">
-            <ProductCard product={product} productId={product._id} />
+            <ProductCard product={product} />
           </li>
         ))}
       </ul>

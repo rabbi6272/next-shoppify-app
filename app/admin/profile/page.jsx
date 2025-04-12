@@ -4,9 +4,10 @@ import { useRouter } from "next/navigation";
 import { CldImage } from "next-cloudinary";
 
 import { toast } from "react-toastify";
-import useUserStore from "@/lib/store/store";
 import { Button } from "@material-tailwind/react";
 import { EditAvatarModal } from "@/app/admin/profile/EditAvatarModal";
+
+import { useUserStore } from "@/lib/store/store";
 
 export default function Profile() {
   const user = useUserStore((state) => state.user);

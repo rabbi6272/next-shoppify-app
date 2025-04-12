@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import useUserStore from "@/lib/store/store";
+import { useUserStore } from "@/lib/store/store";
 
 export function UserDataFetcher() {
   const setUser = useUserStore((state) => state.setUser);

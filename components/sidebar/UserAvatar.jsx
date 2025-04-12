@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { CldImage } from "next-cloudinary";
+
 import { motion } from "motion/react";
 
-import useUserStore from "@/lib/store/store";
-import { CldImage } from "next-cloudinary";
+import { useUserStore } from "@/lib/store/store";
 
 function UserComponent() {
   const user = useUserStore((state) => state.user);

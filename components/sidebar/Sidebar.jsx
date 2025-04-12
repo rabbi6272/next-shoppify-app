@@ -5,7 +5,7 @@ import React from "react";
 import { Inter } from "next/font/google";
 
 import { UserAvatar } from "./UserAvatar";
-import useUserStore from "@/lib/store/store";
+import { useUserStore } from "@/lib/store/store";
 
 const inter = Inter({ subsets: ["latin"] });
 

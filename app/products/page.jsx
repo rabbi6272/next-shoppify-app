@@ -2,13 +2,16 @@
 import { useState, useEffect } from "react";
 
 import { Select, Option } from "@material-tailwind/react";
+import { motion } from "framer-motion";
 
-import { cacheProducts, getProductsFromCache } from "@/utils/cache";
+import { useProductStore } from "@/lib/store/store";
 
 import { ProductCard } from "./productCard";
 import { CardPlacehoderSkeleton } from "./cardPlaceholder";
 
 export default function Products() {
+  const products = useProductStore((state) => state.products);
+  const setProducts = useProductStore((state) => state.setProducts);
   const [category, setCategory] = useState(null);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -16,16 +19,15 @@ export default function Products() {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const cachedProducts = await getProductsFromCache();
-        if (cachedProducts) {
-          setData(cachedProducts);
+        if (products.length > 0) {
+          setData(products);
         } else {
           const res = await fetch(
             `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/getProducts`,
             { method: "GET" }
           );
           const { data } = await res.json();
-          await cacheProducts(data);
+          setProducts(data);
           setData(data);
         }
       } catch (error) {
@@ -35,7 +37,9 @@ export default function Products() {
       }
     };
     fetchData();
-  }, [setData]);
+  }, [setData, setProducts]);
+
+  console.log("products", products);
 
   const filteredData = data.filter((product) => {
     if (category === "All" || category === null) {
@@ -47,7 +51,7 @@ export default function Products() {
   return (
     <div>
       {isLoading ? (
-        <div className="h-full w-full m-auto">
+        <div className="h-auto w-full grid place-items-center">
           <CardPlacehoderSkeleton />
         </div>
       ) : (
@@ -70,13 +74,18 @@ export default function Products() {
             </Select>
           </div>
 
-          <ul className="wrapper min-h-screen w-full px-2 pt-2 md:px-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4">
+          <motion.ul
+            className="wrapper min-h-screen w-full px-2 pt-2 md:px-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
             {filteredData?.map((product) => (
               <li key={product._id} className="card">
                 <ProductCard product={product} />
               </li>
             ))}
-          </ul>
+          </motion.ul>
         </div>
       )}
     </div>

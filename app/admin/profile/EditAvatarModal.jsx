@@ -9,11 +9,9 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import { FileInput, Label } from "flowbite-react";
-
-// import { Input } from "@/components/ui/input";
-// import { Label } from "@/components/ui/label";
 import { toast } from "react-toastify";
-import useUserStore from "@/lib/store/store";
+
+import { useUserStore } from "@/lib/store/store";
 
 export function EditAvatarModal() {
   const setUser = useUserStore((state) => state.setUser);

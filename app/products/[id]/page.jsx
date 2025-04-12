@@ -1,11 +1,11 @@
 "use client";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 
 import { CardPlacehoderSkeleton } from "../cardPlaceholder";
+import { useProductStore } from "@/lib/store/store";
 
-import { getProductsFromCache } from "@/utils/cache";
 import { getProductById } from "@/utils/dataLayes";
 
 const inter = Inter({
@@ -17,24 +17,25 @@ const inter = Inter({
 export default function Page(params) {
   const { id } = params.params;
 
-  const [product, setProduct] = useState(null);
+  const products = useProductStore((state) => state.products);
+
+  const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const cachedProducts = await getProductsFromCache();
-        if (cachedProducts) {
-          const productFromCache = cachedProducts.find((p) => p._id === id);
+        if (products.length > 0) {
+          const productFromCache = products.find((p) => p._id === id);
           if (productFromCache) {
-            setProduct(productFromCache);
+            setData(productFromCache);
           } else {
             const res = await getProductById(id);
-            setProduct(res);
+            setData(res);
           }
         } else {
           const res = await getProductById(id);
-          setProduct(res);
+          setData(res);
         }
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -45,29 +46,31 @@ export default function Page(params) {
     fetchData();
   }, [id]);
 
-  if (!product) {
+  if (!data) {
     return <div className="text-center text-lg p-10 ">Product not found</div>;
   }
 
   return (
     <div className="w-full max-h-screen">
       {isLoading ? (
-        <CardPlacehoderSkeleton />
+        <div className="h-auto w-full grid place-items-center">
+          <CardPlacehoderSkeleton />
+        </div>
       ) : (
         <div className="p-4 w-[90%] md:w-[350px] h-auto m-auto bg-white rounded-lg shadow-lg flex flex-col items-center justify-center">
           <Image
             width={300}
             height={300}
-            style={{ width: "100%", height: "auto" }}
-            src={product?.image_url}
-            alt={product?.name}
+            style={{ height: "auto" }}
+            src={data?.image_url}
+            alt={data?.name}
             className="rounded-lg object-cover"
           />
           <h2 className={`${inter.className} text-lg font-normal py-1`}>
-            {product?.name}
+            {data?.name}
           </h2>
-          <p>{product?.description}</p>
-          <h2 className={`${inter.className} text-2xl`}>{product?.price}$</h2>
+          <p>{data?.description}</p>
+          <h2 className={`${inter.className} text-2xl`}>{data?.price}$</h2>
         </div>
       )}
     </div>

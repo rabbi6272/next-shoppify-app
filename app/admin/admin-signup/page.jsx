@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import { toast } from "react-toastify";
 
-import useUserStore from "@/lib/store/store";
+import { useUserStore } from "@/lib/store/store";
 
 export default function AdminSignup() {
   const router = useRouter();

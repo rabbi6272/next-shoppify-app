@@ -11,7 +11,7 @@ import {
   ListItem,
   ListItemPrefix,
 } from "@material-tailwind/react";
-import useUserStore from "@/lib/store/store";
+import { useUserStore } from "@/lib/store/store";
 import { UserAvatar } from "./UserAvatar";
 
 export function SmallNavigationDrawer() {

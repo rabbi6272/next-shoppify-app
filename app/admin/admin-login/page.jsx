@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
 import { useState } from "react";
 
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
-import useUserStore from "@/lib/store/store";
 import { toast } from "react-toastify";
+
+import { useUserStore } from "@/lib/store/store";
 
 export default function AdminLogin() {
   const router = useRouter();

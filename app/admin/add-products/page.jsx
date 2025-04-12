@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+
 import { Select, Option, Button } from "@material-tailwind/react";
+import { Label, FileInput } from "flowbite-react";
 import { toast } from "react-toastify";
 
 export default function AddProductPage() {
@@ -126,23 +128,9 @@ export default function AddProductPage() {
               </Select>
             </div>
 
-            <div>
-              <p className="block antialiased font-sans text-sm font-light leading-normal text-blue-gray-900">
-                Image
-                <span className="inline-block text-red-500 ml-0.5">*</span>
-              </p>
-              <div>
-                <input
-                  name="file"
-                  required
-                  type="file"
-                  accept="image/*"
-                  onChange={handleChange}
-                  className="w-full rounded-md border border-blue-gray-200"
-                />
-              </div>
-            </div>
+            <FileInput id="file-upload" onChange={handleChange} name="file" />
           </div>
+
           <div className="w-full p-4">
             <Button
               type="submit"

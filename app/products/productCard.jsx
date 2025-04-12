@@ -11,7 +11,7 @@ const inter = Inter({
   display: "swap",
 });
 
-export default function ProductCard({ product }) {
+export function ProductCard({ product }) {
   const router = useRouter();
 
   if (!product) return null;

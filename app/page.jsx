@@ -13,7 +13,6 @@ export default function Home() {
       transition={{ duration: 0.5 }}
       className="h-auto"
     >
-
       {/* Hero Section */}
       <div className="w-full h-[40vh] md:h-[80vh] xl:h-[100vh]">
         <Splide
@@ -65,13 +64,13 @@ export default function Home() {
       </div>
 
       {/* Features Section */}
-      <section className="py-16 bg-gradient-to-b from-background to-gray-900">
-        <div className="container mx-auto px-4">
+      <section className="py-10">
+        <div className="w-[80%] md:w-full mx-auto px-4">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            className="text-center mb-8"
           >
             <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-text">
               Why Choose Us
@@ -119,7 +118,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="bg-buttonPrimary text-white py-7"
+        className="bg-buttonPrimary text-white py-7 rounded-t-lg"
       >
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl lg:text-4xl font-semibold mb-2 lg:mb-4">

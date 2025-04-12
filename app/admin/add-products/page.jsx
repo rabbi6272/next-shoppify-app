@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { Select, Option, Button } from "@material-tailwind/react";
-import { Label, FileInput } from "flowbite-react";
+import { FileInput } from "flowbite-react";
 import { toast } from "react-toastify";
 
 export default function AddProductPage() {
@@ -40,17 +40,21 @@ export default function AddProductPage() {
     ) {
       return toast.error("Please fill up all the fields");
     }
+
     try {
       setPending(true);
-      const response = await fetch(`/api/products/addProducts`, {
-        method: "POST",
-        body: inputData,
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/addProducts`,
+        {
+          method: "POST",
+          body: inputData,
+        }
+      );
       const data = await response.json();
       if (data.success) {
         setPending(false);
         toast.success(data.message);
-        router.push("/");
+        router.push("/products");
       } else {
         setPending(false);
         toast.error(data.message);

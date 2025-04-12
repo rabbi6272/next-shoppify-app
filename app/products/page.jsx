@@ -1,6 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
+
 import { Select, Option } from "@material-tailwind/react";
+
+import { cacheProducts, getProductsFromCache } from "@/utils/cache";
+
 import { ProductCard } from "./productCard";
 import { CardPlacehoderSkeleton } from "./cardPlaceholder";
 
@@ -12,12 +16,18 @@ export default function Products() {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/getProducts`,
-          { method: "GET" }
-        );
-        const { data } = await res.json();
-        setData(data);
+        const cachedProducts = await getProductsFromCache();
+        if (cachedProducts) {
+          setData(cachedProducts);
+        } else {
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/getProducts`,
+            { method: "GET" }
+          );
+          const { data } = await res.json();
+          await cacheProducts(data);
+          setData(data);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -71,26 +81,4 @@ export default function Products() {
       )}
     </div>
   );
-}
-
-{
-  /* 
-        <div className="flex items-center w-[300px] gap-2 px-4 py-2">
-          <p className="text-nowrap ">Sort by:</p>
-          <Select
-            name="category"
-            label="Select Category"
-            className="flex-1 bg-white rounded-lg"
-            value={category}
-            onChange={(e) => setCategory(e)}
-          >
-            <Option value="All">All</Option>
-            <Option value="Food">Food</Option>
-            <Option value="Women's Clothing">Women&apos;s Clothing</Option>
-            <Option value="Men's Clothing">Men&apos;s Clothing</Option>
-            <Option value="Smartphones">Smartphones</Option>
-            <Option value="Electronics">Electronics</Option>
-            <Option value="Home Decoration">Home Decoration</Option>
-          </Select>
-          </div> */
 }

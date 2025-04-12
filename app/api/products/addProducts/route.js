@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 import ProductItem from "@/model/ProductSchema.model";
 import { connectDB } from "@/lib/DB/connectDB";
 import { uploadProductImage } from "@/utils/uploadProductImage";
-import { revalidatePath } from "next/cache";
+
+import { cache } from "@/utils/cache";
 
 export async function POST(request) {
   try {
@@ -37,7 +39,8 @@ export async function POST(request) {
     const product = new ProductItem(body);
     await product.save();
 
-    revalidatePath("/api/products/getProducts");
+    //delete cache from cache
+    cache.del("products");
 
     return NextResponse.json(
       { success: true, message: "Product added successfully" },

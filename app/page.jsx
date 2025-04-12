@@ -14,7 +14,7 @@ export default function Home() {
       className="h-auto"
     >
       {/* Hero Section */}
-      <div className="w-full h-[40vh] md:h-[80vh] xl:h-[100vh]">
+      <div className="w-full h-[35vh] md:h-[80vh] xl:h-[100vh]">
         <Splide
           options={{
             type: "loop",
@@ -65,7 +65,7 @@ export default function Home() {
 
       {/* Features Section */}
       <section className="py-10">
-        <div className="w-[80%] md:w-full mx-auto px-4">
+        <div className="w-[95%] md:w-full mx-auto px-4">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}

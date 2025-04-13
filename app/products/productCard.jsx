@@ -1,14 +1,22 @@
 "use client";
 import { useRouter } from "next/navigation";
-
-import { Inter } from "next/font/google";
 import { CldImage } from "next-cloudinary";
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
+
 import { motion } from "framer-motion";
 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
+  variable: "--font-inter",
+});
+
+const spaceGrotesk = localFont({
+  src: "../fonts/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf",
+  display: "swap",
+  weight: "500",
 });
 
 export function ProductCard({ product }) {
@@ -23,7 +31,7 @@ export function ProductCard({ product }) {
       className="w-full h-auto max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 hover:drop-shadow-xl cursor-pointer"
     >
       <div
-        className="relative h-[290px] md:h-[300px] w-full"
+        className="relative h-[250px] md:h-[300px] w-full"
         onClick={() => router.push(`/products/${product?._id}`)}
       >
         <CldImage
@@ -36,13 +44,13 @@ export function ProductCard({ product }) {
       </div>
       <div className="px-3 pb-4">
         <h5
-          className={`${inter.className} text-lg py-2 font-base text-gray-900 dark:text-white`}
+          className={`${spaceGrotesk.className} text-base md:text-lg py-2 font-base text-gray-900 dark:text-white`}
         >
           {product?.name}
         </h5>
         <div className="flex items-center justify-between">
           <span
-            className={`${inter.className} font-bold text-xl text-gray-900 dark:text-white`}
+            className={`${inter.className} font-bold text-xl text-[#4CAF50]`}
           >
             {product?.price}$
           </span>
@@ -50,7 +58,7 @@ export function ProductCard({ product }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, duration: 0.3 }}
-            className="text-white bg-buttonPrimary hover:bg-buttonSecondary font-medium rounded-full text-lg px-6 py-1.5 text-center "
+            className="text-white bg-[#4caf4fcc] hover:bg-[#4caf4f] font-medium rounded-full text-lg px-6 py-1.5 text-center "
             onClick={() => {
               console.log(`Added to cart ${product?._id}`);
             }}

@@ -21,10 +21,14 @@ body {
 .avatar-container {
   background-color: var(--color-secondary);
 }
-/* main {
-  background-color: var(--color-secondary);
-} */
-
+.buttonInsideInput {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  z-index: 100;
+}
 @media (max-width: 960px) {
   body {
     overflow: auto;
@@ -69,12 +73,12 @@ body {
 
 ::-webkit-scrollbar {
   /* Customize the scrollbar width */
-  width: 5px;
+  width: 10px;
 }
 ::-webkit-scrollbar-thumb {
   /* Customize the scrollbar thumb */
   background-color: #888;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 @layer utilities {
@@ -138,8 +142,6 @@ body {
     --chart-5: 340 75% 55%;
   }
 }
-
-
 
 @layer base {
   * {

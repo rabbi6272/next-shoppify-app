@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 
+import { motion } from "framer-motion";
+
 import { CardPlacehoderSkeleton } from "../cardPlaceholder";
 import { useProductStore } from "@/lib/store/store";
-
-import { getProductById } from "@/utils/dataLayes";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,7 +18,6 @@ export default function Page(params) {
   const { id } = params.params;
 
   const products = useProductStore((state) => state.products);
-
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -27,15 +26,8 @@ export default function Page(params) {
         setIsLoading(true);
         if (products.length > 0) {
           const productFromCache = products.find((p) => p._id === id);
-          if (productFromCache) {
-            setData(productFromCache);
-          } else {
-            const res = await getProductById(id);
-            setData(res);
-          }
-        } else {
-          const res = await getProductById(id);
-          setData(res);
+          console.log("product from cache", productFromCache);
+          setData(productFromCache);
         }
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -47,7 +39,11 @@ export default function Page(params) {
   }, [id]);
 
   if (!data) {
-    return <div className="text-center text-lg p-10 ">Product not found</div>;
+    return (
+      <div className="text-center text-lg p-10 font-semibold">
+        Product not found
+      </div>
+    );
   }
 
   return (
@@ -57,7 +53,12 @@ export default function Page(params) {
           <CardPlacehoderSkeleton />
         </div>
       ) : (
-        <div className="p-4 w-[90%] md:w-[350px] h-auto m-auto bg-white rounded-lg shadow-lg flex flex-col items-center justify-center">
+        <motion.div
+          className="p-4 w-[80%] md:w-[350px] h-auto m-auto bg-white rounded-lg shadow-lg flex flex-col items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <Image
             width={300}
             height={300}
@@ -70,8 +71,12 @@ export default function Page(params) {
             {data?.name}
           </h2>
           <p>{data?.description}</p>
-          <h2 className={`${inter.className} text-2xl`}>{data?.price}$</h2>
-        </div>
+          <h2
+            className={`${inter.className} text-2xl font-semibold text-[#4CAF50]`}
+          >
+            {data?.price}$
+          </h2>
+        </motion.div>
       )}
     </div>
   );

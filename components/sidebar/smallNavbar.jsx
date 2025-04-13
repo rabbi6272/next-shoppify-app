@@ -2,6 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
+import localFont from "next/font/local";
+
 import {
   Drawer,
   Button,
@@ -13,6 +15,12 @@ import {
 } from "@material-tailwind/react";
 import { useUserStore } from "@/lib/store/store";
 import { UserAvatar } from "./UserAvatar";
+
+const ttTrailer = localFont({
+  src: "../../app/fonts/TT_Trailer/TT Trailers Trial ExtraBold Italic.ttf",
+  display: "swap",
+  weight: "800",
+});
 
 export function SmallNavigationDrawer() {
   const [open, setOpen] = React.useState(false);
@@ -51,8 +59,12 @@ export function SmallNavigationDrawer() {
       <Drawer open={open} onClose={closeDrawer} placement="right">
         <div className="flex items-center justify-between p-4">
           <Link href="/" onClick={closeDrawer}>
-            <Typography variant="h5" color="blue-gray">
-              Shopping Cart
+            <Typography
+              variant="h5"
+              color="blue-gray"
+              className={`${ttTrailer.className} -tracking-tight text-3xl font-bold text-buttonSecondary`}
+            >
+              Shoppify 🛒
             </Typography>
           </Link>
           <IconButton variant="text" color="blue-gray" onClick={closeDrawer}>
@@ -73,7 +85,7 @@ export function SmallNavigationDrawer() {
           </IconButton>
         </div>
 
-        <div className="flex flex-col justify-between">
+        <div className="small-navbar flex flex-col justify-between">
           <List>
             <Link href="/" onClick={closeDrawer}>
               <ListItem>
@@ -181,7 +193,7 @@ export function SmallNavigationDrawer() {
 
           {user && (
             <Link onClick={closeDrawer} href="/admin/profile">
-              <div className="w-full absolute bottom-0 flex gap-2 items-center p-2 bg-blue-gray-50 cursor-pointer">
+              <div className="bg-[#c8d8e1] w-full absolute bottom-0 flex gap-2 items-center p-2  cursor-pointer">
                 <UserAvatar />
 
                 <span>

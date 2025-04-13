@@ -1,7 +1,8 @@
 import "./globals.css";
 
 import Link from "next/link";
-import { Nunito, Inter } from "next/font/google";
+import { Nunito } from "next/font/google";
+import localFont from "next/font/local";
 
 import { SmallNavigationDrawer } from "@/components/sidebar/smallNavbar";
 import { Slide, ToastContainer } from "react-toastify";
@@ -12,7 +13,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { UserDataFetcher } from "@/components/custom/DataFetcher";
 
 export const metadata = {
-  title: "Shopping Cart || shop anything anytime",
+  title: "Shoppify || shop anything anytime",
   description: "An unique and versitile platform for good quality shopping",
 };
 
@@ -21,7 +22,11 @@ const nunito = Nunito({
   display: "swap",
 });
 
-const inter = Inter({ subsets: ["latin"] });
+const ttTrailer = localFont({
+  src: "./fonts/TT_Trailer/TT Trailers Trial ExtraBold Italic.ttf",
+  display: "swap",
+  weight: "800",
+});
 
 export default async function RootLayout({ children }) {
   return (
@@ -40,8 +45,10 @@ export default async function RootLayout({ children }) {
 
         <header className="header z-10 w-full h-[70px] px-4 md:px-8 bg-inherit flex items-center justify-between text-black">
           <Link href="/">
-            <h1 className={`${inter.className} text-3xl font-bold `}>
-              Shopping Cart
+            <h1
+              className={`${ttTrailer.className} -tracking-tight text-3xl font-bold text-buttonSecondary`}
+            >
+              Shoppify 🛒
             </h1>
           </Link>
           <div>

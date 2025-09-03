@@ -9,16 +9,16 @@ const cloudinaryConfig = {
 };
 
 // Log cloud name on load to help with debugging
-if (typeof window !== "undefined") {
-  console.log(
-    "Cloudinary config loaded, cloud name:",
-    cloudinaryConfig.cloudName || "NOT SET"
-  );
-  if (!cloudinaryConfig.cloudName) {
-    console.warn(
-      "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME environment variable is not set"
-    );
-  }
-}
+// if (typeof window !== "undefined") {
+//   console.log(
+//     "Cloudinary config loaded, cloud name:",
+//     cloudinaryConfig.cloudName || "NOT SET"
+//   );
+//   if (!cloudinaryConfig.cloudName) {
+//     console.warn(
+//       "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME environment variable is not set"
+//     );
+//   }
+// }
 
 export default cloudinaryConfig;

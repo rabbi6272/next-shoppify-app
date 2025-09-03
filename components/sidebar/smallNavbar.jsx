@@ -172,7 +172,7 @@ export function SmallNavigationDrawer() {
           {user && (
             <Link href="/profile" onClick={closeDrawer}>
               <div className="bg-[#c8d8e1] w-full absolute bottom-0 flex gap-2 items-center p-2  cursor-pointer">
-                <UserAvatar photoUrl={user?.photoURL} />
+                {/* <UserAvatar photoUrl={user?.photoURL} /> */}
 
                 <span>
                   <p className="text-sm font-semibold"> {user?.displayName}</p>

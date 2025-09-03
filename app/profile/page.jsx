@@ -1,17 +1,20 @@
 "use client";
 import React, { useState } from "react";
-import { useAuth } from "@/lib/AuthProvider";
+import Link from "next/link";
+import { CldImage } from "next-cloudinary";
+
 import { updateProfile, updateEmail, updatePassword } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase/firebase";
+
 import { toast } from "react-toastify";
-import Image from "next/image";
-import { UpdatePhotoUrlDialog } from "./updatePhotoUrl";
 import { Input } from "@material-tailwind/react";
-import { CldImage } from "next-cloudinary";
+
+import { UpdatePhotoUrlDialog } from "./updatePhotoUrl";
+import { useAuthStore } from "@/lib/hooks/useAuthStore";
 
 export default function UserProfilePage() {
-  const { user, loading, updateProfile: updateUserProfile } = useAuth();
+  const { user, loading, updateProfile: updateUserProfile } = useAuthStore();
 
   // Initialize state with empty values first
   const [name, setName] = useState("");
@@ -21,8 +24,6 @@ export default function UserProfilePage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [updatingProfile, setUpdatingProfile] = useState(false);
   const [updatingPassword, setUpdatingPassword] = useState(false);
-
-  const [profileImage, setProfileImage] = useState(null);
 
   // Update form values when user data becomes available
   React.useEffect(() => {
@@ -42,9 +43,15 @@ export default function UserProfilePage() {
 
   if (!user) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center">
+      <div className="flex h-dvh flex-col items-center justify-center">
         <h1 className="text-2xl font-bold mb-4">Not Logged In</h1>
-        <p>Please log in to view your profile.</p>
+        <p>
+          Please{" "}
+          <Link href="/auth/login" className="text-indigo-500 ">
+            log in
+          </Link>{" "}
+          to view your profile.
+        </p>
       </div>
     );
   }
@@ -201,7 +208,6 @@ export default function UserProfilePage() {
                     type="email"
                     name="email"
                     id="email"
-                    // className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:outline-none focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required

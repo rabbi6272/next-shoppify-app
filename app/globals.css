@@ -56,10 +56,6 @@ body {
     padding: 0.5rem;
     max-height: calc(100vh - 70px);
   }
-  .sidebar li :hover {
-    background-color: var(--color-secondary);
-    /* background-color: #e0e0e0; */
-  }
   .main {
     grid-area: "main ";
     border-radius: 1rem 0 0 0;

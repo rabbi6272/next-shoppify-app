@@ -1,15 +1,17 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase/firebase";
-import { useRouter } from "next/navigation";
+
 import { toast } from "react-toastify";
 import { setCookie } from "@/utils/cookies";
-import { useUserStore } from "@/lib/store/store";
-import Link from "next/link";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +20,6 @@ export default function SignupPage() {
   const [adminCode, setAdminCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
-  const router = useRouter();
 
   const validatePassword = (pass) => {
     let strength = 0;
@@ -93,19 +94,6 @@ export default function SignupPage() {
           path: "/",
           secure: process.env.NODE_ENV === "production",
         });
-
-        // Update the user store to reflect admin role
-        const adminUserData = {
-          uid: user.uid,
-          displayName: name,
-          email: user.email,
-          ...adminData,
-        };
-
-        console.log("Setting admin user data:", adminUserData);
-
-        useUserStore.getState().setUser(adminUserData);
-
         toast.success("Admin account created successfully!");
         router.push("/admin/dashboard");
       } else {

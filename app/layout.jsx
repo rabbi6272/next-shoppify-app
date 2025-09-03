@@ -12,6 +12,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { AuthProvider } from "../lib/AuthProvider";
+import { UserAvatar } from "@/components/sidebar/UserAvatar";
 
 // Import with no SSR to avoid hydration issues
 const SmallNavigationDrawer = dynamic(
@@ -61,6 +62,9 @@ export default async function RootLayout({ children }) {
             <div>
               <span className="block lg:hidden">
                 <SmallNavigationDrawer />
+              </span>
+              <span className="hidden lg:block">
+                <UserAvatar />
               </span>
             </div>
           </header>

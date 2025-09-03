@@ -4,7 +4,6 @@ import { Slide, ToastContainer } from "react-toastify";
 
 import { Nunito } from "next/font/google";
 import localFont from "next/font/local";
-import dynamic from "next/dynamic";
 
 import { Sidebar } from "@/components/sidebar/Sidebar";
 
@@ -13,15 +12,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { AuthProvider } from "../lib/AuthProvider";
 import { UserAvatar } from "@/components/sidebar/UserAvatar";
-
-// Import with no SSR to avoid hydration issues
-const SmallNavigationDrawer = dynamic(
-  () =>
-    import("@/components/sidebar/smallNavbar").then(
-      (mod) => mod.SmallNavigationDrawer
-    ),
-  { ssr: false }
-);
+import { SmallNavigationDrawer } from "@/components/sidebar/smallNavbar";
 
 export const metadata = {
   title: "Shoppify || shop anything anytime",

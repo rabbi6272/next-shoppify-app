@@ -6,7 +6,6 @@ import { Inter } from "next/font/google";
 import { motion } from "framer-motion";
 
 import { CardPlacehoderSkeleton } from "../cardPlaceholder";
-import { useProductStore } from "@/lib/store/store";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,7 +16,7 @@ const inter = Inter({
 export default function Page(params) {
   const { id } = params.params;
 
-  const products = useProductStore((state) => state.products);
+  const products = []; // useProductStore((state) => state.products); --- IGNORE ---
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {

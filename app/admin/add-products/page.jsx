@@ -6,13 +6,8 @@ import { Select, Option, Button } from "@material-tailwind/react";
 import { FileInput } from "flowbite-react";
 import { toast } from "react-toastify";
 
-import { useProductStore } from "@/lib/store/store";
-
 export default function AddProductPage() {
   const router = useRouter();
-
-  const products = useProductStore((state) => state.products);
-  const setProducts = useProductStore((state) => state.setProducts);
   const [pending, setPending] = useState(false);
   const [formState, setFormState] = useState({
     name: "",

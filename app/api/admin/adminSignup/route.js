@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
-
-import bcrypt from "bcrypt";
-
-import Admin from "@/model/adminSchema.model";
-import { connectDB } from "@/lib/DB/connectDB";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db } from "@/lib/firebase/firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 export async function POST(request) {
   const formData = await request.formData();
@@ -19,37 +17,48 @@ export async function POST(request) {
   }
 
   try {
-    await connectDB();
-    const admin = await Admin.findOne({ email: email });
+    // Check if admin with the same email already exists
+    const adminRef = doc(db, "admins", email);
+    const adminDoc = await getDoc(adminRef);
 
-    if (admin) {
+    if (adminDoc.exists()) {
       return NextResponse.json({
         success: false,
         message: "Email already exists",
       });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newAdmin = new Admin({
+    // Create the user in Firebase Authentication
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    // Update the user profile
+    await updateProfile(user, { displayName: name });
+
+    // Create admin document in Firestore
+    const adminData = {
+      uid: user.uid,
       name: name,
       email: email,
-      password: hashedPassword,
       image_url: "",
       image_id: "",
-      role: "",
-    });
+      role: "admin",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
 
-    await newAdmin.save();
+    await setDoc(doc(db, "admins", user.uid), adminData);
 
     return NextResponse.json({
       success: true,
       message: "Admin created successfully",
-      user: newAdmin,
+      user: adminData,
     });
   } catch (error) {
+    console.error("Error creating admin:", error);
     return NextResponse.json({
       success: false,
-      message: error.message,
+      message: error.message || "An error occurred while creating admin",
     });
   }
 }

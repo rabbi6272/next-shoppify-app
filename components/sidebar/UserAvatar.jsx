@@ -1,26 +1,22 @@
 "use client";
 
-import Link from "next/link";
 import { CldImage } from "next-cloudinary";
 
 import { motion } from "motion/react";
 
-import { useUserStore } from "@/lib/store/store";
-
-function UserComponent() {
-  const user = useUserStore((state) => state.user);
+function UserComponent({ photoUrl }) {
   return (
     <>
-      {user ? (
+      {photoUrl ? (
         <div>
           <div className="w-[50px] h-[50px] overflow-hidden rounded-full cursor-pointer">
-            {user.image_url ? (
+            {photoUrl ? (
               <CldImage
                 crop={"fill"}
                 width={50}
                 height={50}
                 gravity="face"
-                src={user.image_id}
+                src={photoUrl}
                 alt="user image"
               />
             ) : (
@@ -57,7 +53,7 @@ function UserComponent() {
   );
 }
 
-export function UserAvatar() {
+export function UserAvatar({ photoUrl }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0 }}
@@ -67,39 +63,7 @@ export function UserAvatar() {
         scale: { type: "spring", visualDuration: 0.8, bounce: 0.1 },
       }}
     >
-      <UserComponent />
+      <UserComponent photoUrl={photoUrl} />
     </motion.div>
   );
-}
-
-{
-  /* <div className="flex items-center gap-8">
-        <Link
-          className="px-6 py-2 rounded-full hover:bg-gray-200 hover:drop-shadow-xl "
-          href="/"
-        >
-          Home
-        </Link>
-        <Link
-          className="px-6 py-2 rounded-full  hover:bg-gray-200 hover:drop-shadow-xl "
-          href="/about"
-        >
-          About
-        </Link>
-        {user ? (
-          <Link
-            className="px-6 py-2 rounded-full  hover:bg-gray-200 hover:drop-shadow-xl "
-            href="/admin"
-          >
-            Dashboard
-          </Link>
-        ) : (
-          <Link
-            className="px-6 py-2 rounded-full  hover:bg-gray-200 hover:drop-shadow-xl "
-            href="/admin/admin-login"
-          >
-            Login
-          </Link>
-        )}
-      </div> */
 }

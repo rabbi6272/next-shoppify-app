@@ -10,7 +10,7 @@ export default async function Products() {
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/getProducts`,
     { method: "GET", cache: "no-store" }
   );
-  const { data } = await res.json();
+  const { data: data } = await res.json();
 
   return (
     <Suspense

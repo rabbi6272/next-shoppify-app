@@ -1,71 +1,147 @@
 import { NextRequest, NextResponse } from "next/server";
-import Admin from "@/model/adminSchema.model";
-import jwt from "jsonwebtoken";
-import { connectDB } from "@/lib/DB/connectDB";
-import { uploadAdminAvatar } from "@/utils/uploadAdminImage";
-import { deleteImage } from "@/utils/deleteImage";
+import { cookies } from "next/headers";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
+import { updateProfile } from "firebase/auth";
+import { db, auth } from "@/lib/firebase/firebase";
+import { uploadImage, deleteImage } from "@/lib/firebase/firebaseUtils";
 
-export async function POST(NextRequest) {
-  const token = NextRequest.cookies.get("Admin-token")?.value;
-  if (!token) {
+// Function to handle admin avatar upload
+async function uploadAdminAvatar(file, adminId, adminData) {
+  // Delete old image if exists
+  if (adminData.image_path) {
+    await deleteImage(adminData.image_path);
+  }
+
+  // Upload new image to admin-specific folder
+  const imageData = await uploadImage(file, "admin-avatars");
+
+  // Update admin data in Firestore
+  const adminRef = doc(db, "admins", adminId);
+  await updateDoc(adminRef, {
+    image_url: imageData.url,
+    image_path: imageData.path,
+    updatedAt: new Date().toISOString(),
+  });
+
+  // Also update the user profile in Auth
+  if (auth.currentUser && auth.currentUser.uid === adminId) {
+    await updateProfile(auth.currentUser, {
+      photoURL: imageData.url,
+    });
+  }
+
+  return {
+    message: "Admin avatar updated successfully",
+    updatedAdmin: {
+      ...adminData,
+      image_url: imageData.url,
+      image_path: imageData.path,
+    },
+  };
+}
+
+// Function to handle user avatar upload
+async function uploadUserAvatar(file, userId, userData) {
+  // Delete old image if exists
+  if (userData.image_path) {
+    await deleteImage(userData.image_path);
+  }
+
+  // Upload new image to user-specific folder
+  const imageData = await uploadImage(file, "user-avatars");
+
+  // Update user data in Firestore
+  const userRef = doc(db, "users", userId);
+  await updateDoc(userRef, {
+    image_url: imageData.url,
+    image_path: imageData.path,
+    updatedAt: new Date().toISOString(),
+  });
+
+  // Also update the user profile in Auth
+  if (auth.currentUser && auth.currentUser.uid === userId) {
+    await updateProfile(auth.currentUser, {
+      photoURL: imageData.url,
+    });
+  }
+
+  return {
+    message: "User avatar updated successfully",
+    updatedUser: {
+      ...userData,
+      image_url: imageData.url,
+      image_path: imageData.path,
+    },
+  };
+}
+
+export async function POST(request) {
+  const cookieStore = cookies();
+  const adminId = cookieStore.get("admin_session")?.value;
+  const userId = cookieStore.get("user_session")?.value;
+
+  if (!userId && !adminId) {
     return NextResponse.json({ message: "Not authorized" }, { status: 401 });
   }
 
-  const formData = await NextRequest.formData();
+  const formData = await request.formData();
   const file = formData.get("file");
-  console.log(file);
 
   if (!file) {
     return NextResponse.json({ message: "No file found" }, { status: 400 });
   }
 
+  if (!(file instanceof File)) {
+    return NextResponse.json({ message: "Invalid file" }, { status: 400 });
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    return NextResponse.json(
+      { message: "File size exceeds 5MB limit" },
+      { status: 400 }
+    );
+  }
+
   try {
-    await connectDB();
-    const adminID = jwt.verify(token, process.env.JWT_SECRET).id;
-    const admin = await Admin.findById(adminID);
-    if (!admin) {
-      return NextResponse.json({ message: "Admin not found" }, { status: 404 });
+    let result;
+
+    // Determine if it's an admin or regular user upload
+    if (adminId) {
+      // Get admin data from Firestore
+      const adminRef = doc(db, "admins", adminId);
+      const adminDoc = await getDoc(adminRef);
+
+      if (!adminDoc.exists()) {
+        return NextResponse.json(
+          { message: "Admin not found" },
+          { status: 404 }
+        );
+      }
+
+      const adminData = adminDoc.data();
+      result = await uploadAdminAvatar(file, adminId, adminData);
+    } else {
+      // Get user data from Firestore
+      const userRef = doc(db, "users", userId);
+      const userDoc = await getDoc(userRef);
+
+      if (!userDoc.exists()) {
+        return NextResponse.json(
+          { message: "User not found" },
+          { status: 404 }
+        );
+      }
+
+      const userData = userDoc.data();
+      result = await uploadUserAvatar(file, userId, userData);
     }
 
-    if (admin.image_url && admin.image_id) {
-      await deleteImage(admin.image_id);
-    }
-
-    const request = await uploadAdminAvatar(file);
-    const newQuery = {
-      image_url: request.secure_url,
-      image_id: request.public_id,
-    };
-
-    const updatedAdmin = await Admin.findByIdAndUpdate(
-      adminID,
-      { $set: newQuery },
-      { new: true }
-    );
-
-    return NextResponse.json(
-      { message: "Upload successful", updatedAdmin },
-      { status: 200 }
-    );
+    return NextResponse.json(result, { status: 200 });
   } catch (error) {
-    console.error(error);
+    console.error("Error updating avatar:", error);
     return NextResponse.json(
-      { message: "Something went wrong" },
+      { message: error.message || "Error updating avatar" },
       { status: 500 }
     );
   }
-  // try {
-  //   const result = await uploadImage(file, "admin");
-  //   const { secure_url, public_id } = result;
-
-  //   return NextResponse.json(
-  //     { message: "Upload successful", secure_url, public_id },
-  //     { status: 200 }
-  //   );
-  // } catch (error) {
-  //   return NextResponse.json(
-  //     { message: "Something went wrong" },
-  //     { status: 500 }
-  //   );
-  // }
 }

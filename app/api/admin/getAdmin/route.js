@@ -1,39 +1,39 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import jwt from "jsonwebtoken";
-
-import Admin from "@/model/adminSchema.model";
-import { connectDB } from "@/lib/DB/connectDB";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase/firebase";
 
 export async function GET(request) {
   const cookieStore = cookies();
-  const token = cookieStore.get("Admin-token")?.value;
+  const adminId = cookieStore.get("admin_session")?.value;
 
-  if (!token) {
-    return NextResponse.json({ message: "No token provided", success: false });
+  if (!adminId) {
+    return NextResponse.json({ message: "Not authenticated", success: false });
   }
 
   try {
-    await connectDB();
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const admin = await Admin.findById(decoded.id);
+    // Get admin data from Firestore
+    const adminRef = doc(db, "admins", adminId);
+    const adminDoc = await getDoc(adminRef);
 
-    if (!admin) {
+    if (!adminDoc.exists()) {
       return NextResponse.json({ message: "Admin not found", success: false });
     }
 
-    return NextResponse.json({ user: admin, success: true });
-  } catch (error) {
-    if (error instanceof jwt.TokenExpiredError) {
-      return NextResponse.json({
-        message: "Token has expired",
-        success: false,
-      });
-    }
-    if (error instanceof jwt.JsonWebTokenError) {
-      return NextResponse.json({ message: "Invalid token", success: false });
-    }
+    const adminData = adminDoc.data();
 
-    return NextResponse.json({ message: "Server error", success: false });
+    return NextResponse.json({ 
+      user: {
+        id: adminDoc.id,
+        ...adminData
+      }, 
+      success: true 
+    });
+  } catch (error) {
+    console.error("Error getting admin:", error);
+    return NextResponse.json({ 
+      message: "Server error", 
+      success: false 
+    });
   }
 }

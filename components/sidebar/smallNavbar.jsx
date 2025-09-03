@@ -6,15 +6,16 @@ import localFont from "next/font/local";
 
 import {
   Drawer,
-  Button,
   Typography,
   IconButton,
   List,
   ListItem,
   ListItemPrefix,
 } from "@material-tailwind/react";
-import { useUserStore } from "@/lib/store/store";
+
 import { UserAvatar } from "./UserAvatar";
+import { useAuth } from "@/lib/AuthProvider";
+import { toast } from "react-toastify";
 
 const ttTrailer = localFont({
   src: "../../app/fonts/TT_Trailer/TT Trailers Trial ExtraBold Italic.ttf",
@@ -27,23 +28,15 @@ export function SmallNavigationDrawer() {
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
 
-  const user = useUserStore((state) => state.user);
+  const { user, logout } = useAuth();
 
   async function userLogout(e) {
     e.preventDefault();
     try {
-      const res = await fetch("/api/admin/adminLogout", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (res.ok) {
-        setUser({ user: null });
-      }
+      await logout();
     } catch (error) {
       console.log(error);
-      toast.error("An error occured while logging out");
+      toast.error("An error occurred while logging out");
     }
   }
 
@@ -129,24 +122,8 @@ export function SmallNavigationDrawer() {
                 Products
               </ListItem>
             </Link>
-            {/* <ListItem>
-              <ListItemPrefix>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  classNameName="h-5 w-5"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </ListItemPrefix>
-              Profile
-            </ListItem> */}
-            {user && (
+
+            {user?.role === "admin" && (
               <Link href="/admin/dashboard" onClick={closeDrawer}>
                 <ListItem>
                   <ListItemPrefix>
@@ -165,8 +142,9 @@ export function SmallNavigationDrawer() {
                 </ListItem>
               </Link>
             )}
+
             {!user && (
-              <Link href="/admin/admin-login" onClick={closeDrawer}>
+              <Link href="/auth/login" onClick={closeDrawer}>
                 <ListItem>
                   <ListItemPrefix>
                     <svg
@@ -192,12 +170,12 @@ export function SmallNavigationDrawer() {
           </List>
 
           {user && (
-            <Link onClick={closeDrawer} href="/admin/profile">
+            <Link href="/profile" onClick={closeDrawer}>
               <div className="bg-[#c8d8e1] w-full absolute bottom-0 flex gap-2 items-center p-2  cursor-pointer">
-                <UserAvatar />
+                <UserAvatar photoUrl={user?.photoURL} />
 
                 <span>
-                  <p className="text-sm font-semibold"> {user?.name}</p>
+                  <p className="text-sm font-semibold"> {user?.displayName}</p>
                   <p className="text-xs">{user?.email}</p>
                 </span>
               </div>

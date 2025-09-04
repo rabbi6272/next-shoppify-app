@@ -69,5 +69,5 @@ export default withMT({
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), flowbiteReact],
+  plugins: [flowbiteReact],
 });

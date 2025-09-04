@@ -7,7 +7,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase/firebase";
 
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { setCookie } from "@/utils/cookies";
 
 export default function SignupPage() {

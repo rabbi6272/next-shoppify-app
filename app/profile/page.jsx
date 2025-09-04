@@ -7,7 +7,7 @@ import { updateProfile, updateEmail, updatePassword } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase/firebase";
 
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { Input } from "@material-tailwind/react";
 
 import { UpdatePhotoUrlDialog } from "./updatePhotoUrl";

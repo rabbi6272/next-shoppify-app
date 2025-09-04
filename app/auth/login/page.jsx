@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { useAuthStore } from "@/lib/hooks/useAuthStore";
 
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");

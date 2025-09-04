@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 import { Select, Option, Button } from "@material-tailwind/react";
 import { FileInput } from "flowbite-react";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { uploadProductPhoto } from "@/utils/cloudinaryUtils";
 import { saveProduct } from "@/lib/firebase/firebaseUtils";
 

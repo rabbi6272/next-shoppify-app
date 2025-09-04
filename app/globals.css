@@ -14,10 +14,10 @@
   --color-quaternary: #2d7282;
 }
 
-body {
+/* body {
   background-color: var(--color-primary);
   color: var(--color-text);
-}
+} */
 
 .avatar-container {
   background-color: var(--color-secondary);

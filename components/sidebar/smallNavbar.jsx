@@ -15,7 +15,7 @@ import {
 
 import { UserAvatar } from "./UserAvatar";
 import { useAuth } from "@/lib/AuthProvider";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 const ttTrailer = localFont({
   src: "../../app/fonts/TT_Trailer/TT Trailers Trial ExtraBold Italic.ttf",

@@ -1,6 +1,5 @@
 import "./globals.css";
-import "react-toastify/dist/ReactToastify.css";
-import { Slide, ToastContainer } from "react-toastify";
+import { Toaster } from "react-hot-toast";
 
 import { Nunito } from "next/font/google";
 import localFont from "next/font/local";
@@ -43,7 +42,7 @@ export default async function RootLayout({ children }) {
             referrerPolicy="no-referrer"
           />
         </head>
-        <body className={`${nunito.className} h-screen`}>
+        <body className={`${nunito.className} bg-gray-200 h-screen`}>
           <header className="header z-[5] w-full h-[70px] px-4 md:px-8 bg-inherit flex items-center justify-between text-black">
             <h1
               className={`${ttTrailer.className} -tracking-tight text-4xl font-bold text-buttonSecondary`}
@@ -62,18 +61,12 @@ export default async function RootLayout({ children }) {
           <section className="sidebar hidden lg:flex overflow-hidden">
             <Sidebar />
           </section>
-          <main className="main overflow-y-auto overflow-x-hidden">
+          <main className="main bg-gray-50 overflow-y-auto overflow-x-hidden">
             {children}
             <Analytics />
             <SpeedInsights />
           </main>
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            theme="light"
-            transition={Slide}
-          />
+          <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
         </body>
       </html>
     </AuthProvider>

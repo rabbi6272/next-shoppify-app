@@ -1,8 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { CldImage } from "next-cloudinary";
-import { Inter } from "next/font/google";
-import localFont from "next/font/local";
+import { Inter, Space_Grotesk } from "next/font/google";
 
 import { motion } from "framer-motion";
 
@@ -13,10 +12,11 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const spaceGrotesk = localFont({
-  src: "../fonts/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf",
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
-  weight: "500",
+  variable: "--font-space-grotesk",
 });
 
 export function ProductCard({ product }) {
@@ -26,25 +26,23 @@ export function ProductCard({ product }) {
 
   return (
     <motion.div
-      whileHover={{ y: -5 }}
+      whileHover={{ y: -3 }}
       transition={{ duration: 0.2 }}
-      className="w-full h-auto max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 hover:drop-shadow-xl cursor-pointer"
+      className="w-full h-auto max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 hover:drop-shadow-lg "
     >
-      <div
-        className="relative h-[250px] md:h-[300px] w-full"
-        onClick={() => router.push(`/products/${product?._id}`)}
-      >
+      <div className="relative h-[250px] md:h-[300px] w-full">
         <CldImage
           fill
           sizes="100%"
-          src={product?.image_id}
+          src={product?.imageUrl}
           alt="product image"
           className="rounded-t-lg aspect[4/3] object-cover relative"
         />
       </div>
       <div className="px-3 pb-4">
         <h5
-          className={`${spaceGrotesk.className} text-base md:text-lg py-2 font-base text-gray-900 dark:text-white`}
+          onClick={() => router.push(`/products/${product?.id}`)}
+          className={`${spaceGrotesk.className} cursor-pointer text-base md:text-lg py-2 font-base text-gray-900 dark:text-white`}
         >
           {product?.name}
         </h5>

@@ -1,30 +1,44 @@
 "use client";
-import { useState } from "react";
-import { Select, Option } from "@material-tailwind/react";
+import { useState, useEffect } from "react";
+
+import { getProductsByCategory } from "@/lib/firebase/firebaseUtils";
+
+import { Option, Select } from "@material-tailwind/react";
 
 // This is the actual custom hook
 export function useCategory() {
+  const [products, setProducts] = useState([]);
   const [category, setCategory] = useState("All");
+
+  useEffect(() => {
+    async function fetchProducts() {
+      const data = await getProductsByCategory(category);
+      setProducts(data);
+    }
+    fetchProducts();
+  }, [category]);
+
   return {
     category,
     setCategory,
+    products,
+    setProducts,
   };
 }
 
 // This is a separate UI component that uses the hook
-export function CategorySelector() {
-  const { category, setCategory } = useCategory();
+export function CategorySelector({ category, setCategory }) {
   const handleChange = (value) => {
     setCategory(value);
   };
 
   return (
-    <div className="flex items-center w-[300px] gap-2 px-4 py-2">
-      <p className="text-nowrap">Sort by:</p>
+    <div className="flex items-center  gap-2 px-4 py-2">
+      <p className="text-nowrap shrink-0">Sort by:</p>
       <Select
         name="category"
         label="Select Category"
-        className="flex-1 bg-white rounded-lg"
+        className="bg-white rounded-lg"
         value={category}
         onChange={handleChange}
       >

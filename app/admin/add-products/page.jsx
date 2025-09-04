@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { Select, Option, Button } from "@material-tailwind/react";
 import { FileInput } from "flowbite-react";
 import { toast } from "react-toastify";
+import { uploadProductPhoto } from "@/utils/cloudinaryUtils";
+import { saveProduct } from "@/lib/firebase/firebaseUtils";
 
 export default function AddProductPage() {
   const router = useRouter();
@@ -27,39 +29,40 @@ export default function AddProductPage() {
   async function handleAddProductFormSubmit(e) {
     e.preventDefault();
 
-    const inputData = new FormData();
-    inputData.append("name", formState.name);
-    inputData.append("price", formState.price);
-    inputData.append("category", formState.category);
-    inputData.append("file", formState.file);
-
+    const inputData = {
+      name: formState.name,
+      price: formState.price,
+      category: formState.category,
+      file: formState.file,
+    };
     if (
-      !inputData.get("name") ||
-      !inputData.get("price") ||
-      !inputData.get("category")
+      !inputData.name ||
+      !inputData.price ||
+      !inputData.category ||
+      !inputData.file
     ) {
       return toast.error("Please fill up all the fields");
     }
 
     try {
       setPending(true);
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/addProducts`,
-        {
-          method: "POST",
-          body: inputData,
-        }
+      const { success, url, publicId } = await uploadProductPhoto(
+        inputData.file
       );
-      const data = await response.json();
-      if (data.success) {
+      if (success) {
+        const productData = {
+          name: inputData.name,
+          price: inputData.price,
+          category: inputData.category,
+          imageUrl: url,
+          imagePublicId: publicId,
+        };
+        await saveProduct(productData);
         setPending(false);
-        setProducts([]);
-        toast.success(data.message);
-        console.log("after setProducts", products);
+        toast.success("Product added successfully");
         router.push("/products");
       } else {
-        setPending(false);
-        toast.error(data.message);
+        toast.error("Failed to upload product photo");
       }
     } catch (error) {
       setPending(false);

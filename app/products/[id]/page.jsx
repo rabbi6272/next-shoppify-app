@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import { motion } from "framer-motion";
 
 import { CardPlacehoderSkeleton } from "../cardPlaceholder";
+import { getDocumentById } from "@/lib/firebase/firebaseUtils";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,18 +17,19 @@ const inter = Inter({
 export default function Page(params) {
   const { id } = params.params;
 
-  const products = []; // useProductStore((state) => state.products); --- IGNORE ---
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        if (products.length > 0) {
-          const productFromCache = products.find((p) => p._id === id);
-          console.log("product from cache", productFromCache);
-          setData(productFromCache);
-        }
+        getDocumentById("products", id).then((doc) => {
+          if (doc) {
+            setData(doc);
+          } else {
+            setData(null);
+          }
+        });
       } catch (error) {
         console.error("Error fetching product:", error);
       } finally {
@@ -62,7 +64,7 @@ export default function Page(params) {
             width={300}
             height={300}
             style={{ height: "auto" }}
-            src={data?.image_url}
+            src={data?.imageUrl}
             alt={data?.name}
             className="rounded-lg object-cover"
           />

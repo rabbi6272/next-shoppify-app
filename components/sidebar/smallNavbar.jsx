@@ -1,8 +1,6 @@
 "use client";
-
 import React from "react";
 import Link from "next/link";
-import localFont from "next/font/local";
 
 import {
   Drawer,
@@ -17,11 +15,7 @@ import { UserAvatar } from "./UserAvatar";
 import { useAuth } from "@/lib/AuthProvider";
 import { toast } from "react-hot-toast";
 
-const ttTrailer = localFont({
-  src: "../../app/fonts/TT_Trailer/TT Trailers Trial ExtraBold Italic.ttf",
-  display: "swap",
-  weight: "800",
-});
+import { inter, ttTrailer } from "@/app/ui/font";
 
 export function SmallNavigationDrawer() {
   const [open, setOpen] = React.useState(false);

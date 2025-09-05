@@ -84,7 +84,7 @@ export function HomePageContent() {
             placeholder="Enter your email"
             className="w-full px-4 py-4 rounded-full text-text focus:outline-none "
           />
-          <button className="buttonInsideInput bg-buttonPrimary hover:bg-buttonSecondary transition-colors  px-6 py-2 rounded-full ">
+          <button className="buttonInsideInput bg-buttonPrimary hover:bg-buttonSecondary transition-colors px-6 py-2 rounded-full">
             Subscribe
           </button>
         </div>

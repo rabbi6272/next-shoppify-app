@@ -1,23 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { CldImage } from "next-cloudinary";
-import { Inter, Space_Grotesk } from "next/font/google";
 
 import { motion } from "framer-motion";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-inter",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-space-grotesk",
-});
+import { inter, spaceGrotesk } from "@/app/ui/font";
 
 export function ProductCard({ product }) {
   const router = useRouter();

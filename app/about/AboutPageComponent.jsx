@@ -1,14 +1,9 @@
 "use client";
 import Link from "next/link";
-import localFont from "next/font/local";
+
+import { inter, ttTrailer } from "@/app/ui/font";
 
 import { motion } from "framer-motion";
-
-const ttTrailer = localFont({
-  src: "../fonts/TT_Trailer/TT Trailers Trial ExtraBold.ttf",
-  display: "swap",
-  weight: "800",
-});
 
 export default function AboutPageComponent() {
   return (

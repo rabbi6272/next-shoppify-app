@@ -1,9 +1,5 @@
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-
-import { Nunito } from "next/font/google";
-import localFont from "next/font/local";
-
 import { Sidebar } from "@/components/sidebar/Sidebar";
 
 import { Analytics } from "@vercel/analytics/react";
@@ -12,22 +8,14 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AuthProvider } from "../lib/AuthProvider";
 import { UserAvatar } from "@/components/sidebar/UserAvatar";
 import { SmallNavigationDrawer } from "@/components/sidebar/smallNavbar";
+import { SmallNavigationDrawerV2 } from "@/components/sidebar/smallNavbarv2";
+
+import { ttTrailer, nunito } from "./ui/font";
 
 export const metadata = {
   title: "Shoppify || shop anything anytime",
   description: "An unique and versitile platform for good quality shopping",
 };
-
-const nunito = Nunito({
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const ttTrailer = localFont({
-  src: "./fonts/TT_Trailer/TT Trailers Trial ExtraBold Italic.ttf",
-  display: "swap",
-  weight: "800",
-});
 
 export default async function RootLayout({ children }) {
   return (
@@ -51,7 +39,8 @@ export default async function RootLayout({ children }) {
             </h1>
             <div>
               <span className="block lg:hidden">
-                <SmallNavigationDrawer />
+                {/* <SmallNavigationDrawer /> */}
+                <SmallNavigationDrawerV2 />
               </span>
               <span className="hidden lg:block">
                 <UserAvatar />

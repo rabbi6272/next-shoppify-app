@@ -3,8 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/navigation";
 
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"], display: "swap" });
+import { inter } from "@/app/ui/font";
 
 import { useAuthStore } from "@/lib/hooks/useAuthStore";
 
@@ -13,9 +12,7 @@ export function Sidebar() {
   const router = useRouter();
 
   return (
-    <ul
-      className={`${inter.className} font-medium w-full flex flex-col justify-between pb-4`}
-    >
+    <ul className={`${inter.className} font-medium w-full flex flex-col`}>
       <div className="space-y-2">
         <li>
           <Link
@@ -66,33 +63,49 @@ export function Sidebar() {
             </Link>
           </li>
         )}
-        {!user && (
-          <li>
-            <Link
-              href="/auth/login"
-              className="flex items-center p-2 pl-4 rounded-full group text-gray-600 hover:text-gray-800 hover:bg-gray-300"
-            >
-              <i className="fa-solid fa-right-to-bracket fa-md shrink-0 transition duration-200"></i>
-              <span className="flex-1 ms-2 whitespace-nowrap text-md">
-                Log in
-              </span>
-            </Link>
-          </li>
+
+        <span className="block h-px bg-gray-400 my-2 px-2"></span>
+
+        {user ? (
+          <div
+            onClick={async () => {
+              await logout();
+              router.push("/auth/login");
+            }}
+            className="flex items-center p-2 pl-4 rounded-full group text-gray-600 hover:text-gray-800 hover:bg-gray-300 cursor-pointer"
+          >
+            <i className="fa-solid fa-right-from-bracket fa-md shrink-0 transition duration-200"></i>
+            <span className="flex-1 ms-2 whitespace-nowrap text-md">
+              Log out
+            </span>
+          </div>
+        ) : (
+          <>
+            <li>
+              <Link
+                href="/auth/login"
+                className="flex items-center p-2 pl-4 rounded-full group text-gray-600 hover:text-gray-800 hover:bg-gray-300"
+              >
+                <i className="fa-solid fa-right-to-bracket fa-md shrink-0 transition duration-200"></i>
+                <span className="flex-1 ms-2 whitespace-nowrap text-md">
+                  Log in
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/auth/signup"
+                className="flex items-center p-2 pl-4 rounded-full group text-gray-600 hover:text-gray-800 hover:bg-gray-300"
+              >
+                <i className="fa-solid fa-user-plus fa-md shrink-0 transition duration-200"></i>
+                <span className="flex-1 ms-2 whitespace-nowrap text-md">
+                  Log in
+                </span>
+              </Link>
+            </li>
+          </>
         )}
       </div>
-
-      {user && (
-        <div
-          onClick={async () => {
-            await logout();
-            router.push("/auth/login");
-          }}
-          className="flex items-center p-2 pl-4 rounded-full group text-gray-600 hover:text-gray-800 hover:bg-gray-300 cursor-pointer"
-        >
-          <i className="fa-solid fa-right-from-bracket fa-md shrink-0 transition duration-200"></i>
-          <span className="flex-1 ms-2 whitespace-nowrap text-md">Log out</span>
-        </div>
-      )}
     </ul>
   );
 }
